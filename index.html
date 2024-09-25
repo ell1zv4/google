@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Proxy Interactivo</h1>
+    <p>Ingresa una URL para cargar su contenido:</p>
+    <input type="text" id="urlInput" placeholder="Escribe la URL aquí" size="50">
+    <button id="fetchBtn">Cargar Contenido</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('fetchBtn').addEventListener('click', function() {
+            const url = document.getElementById('urlInput').value;
+
+            if (!url) {
+                alert('Por favor, introduce una URL válida.');
+                return;
+            }
+
+            // Hacer la solicitud al proxy
+            fetch(`/proxy?url=${encodeURIComponent(url)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').innerHTML = data; // Mostrar el contenido cargado
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
