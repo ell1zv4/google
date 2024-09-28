@@ -35,10 +35,14 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            display: flex;               /* Agregado para utilizar Flexbox */
+            justify-content: center;     /* Centra horizontalmente */
+            align-items: center;         /* Centra verticalmente */
+            height: 200px;              /* Altura fija para ayudar en el centrado */
         }
 
         .divs img {
-            width: 100%;
+            width: 80%;                 /* Ajustar el tamaño de la imagen */
             height: auto;
             display: block;
             border-radius: 10px;
