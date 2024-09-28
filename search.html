@@ -31,7 +31,7 @@
         .divs {
             background-color: #4b545a;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombras iniciales suaves */
             overflow: hidden;
             position: relative;
             cursor: pointer;
@@ -39,28 +39,45 @@
             justify-content: center;
             align-items: center;
             height: 200px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
         }
 
         /* Efecto hover */
         .divs:hover {
-            transform: scale(1.05);  /* Efecto de expansión suave */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);  /* Sombra más pronunciada */
-            background: linear-gradient(135deg, #4e555b, #6b7379);  /* Fondo con gradiente al hacer hover */
+            background-color: #5d646b;  /* Color de fondo más claro en hover */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra más profunda multicapa */
+            transform: scale(1.08);  /* Más expansión en hover */
         }
 
-        /* Imágenes dentro de los divs */
+        /* Imagenes dentro de los divs */
         .divs img {
-            width: 80%;  /* Ajustar el tamaño de la imagen */
+            width: 80%;  /* Ajuste del tamaño de la imagen */
             height: auto;
             display: block;
             border-radius: 10px;
-            transition: transform 0.4s ease;  /* Transición suave para las imágenes */
+            transition: transform 0.5s ease;  /* Transición suave para las imágenes */
         }
 
         /* Imagen más grande en hover */
         .divs:hover img {
-            transform: scale(1.1);  /* Imagen crece ligeramente en hover */
+            transform: scale(1.12);  /* La imagen crece más en hover */
+        }
+
+        /* Agregar un efecto sutil de resplandor al hacer hover */
+        .divs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0);  /* Sin resplandor inicialmente */
+            transition: box-shadow 0.5s ease;
+        }
+
+        .divs:hover::before {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);  /* Resplandor sutil blanco en hover */
         }
 
         /* Responsividad: ajuste de columnas según el tamaño de la pantalla */
