@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirigir a CroxyProxy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .redirect-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .redirect-btn:hover {
-            background-color: #45a049;
-        }
-    </style>
-    <script>
-        function redirectToCroxyProxy() {
-            // Reemplaza la URL actual sin agregar al historial
-            window.location.replace('https://www.croxyproxy.com');
-        }
-    </script>
+    <title>Automatizar CroxyProxy</title>
 </head>
 <body>
 
-    <button class="redirect-btn" onclick="redirectToCroxyProxy()">Ir a CroxyProxy</button>
+    <h1>Automatización de CroxyProxy</h1>
+    <button id="automateBtn">Automatizar</button>
+
+    <script>
+        // Función para automatizar el proceso en CroxyProxy
+        async function automateCroxyProxy() {
+            window.location.href = "https://www.croxyproxy.com";
+            
+            // Esperar a que la página cargue completamente
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            // Encontrar el campo de entrada y escribir la URL
+            const inputField = document.querySelector('input[name="url"]');
+            inputField.value = "https://es.shein.com";
+
+            // Encontrar el botón y hacer clic
+            const submitButton = document.querySelector('#requestSubmit');
+            submitButton.click();
+
+            // Esperar a que la nueva página cargue
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            // Obtener la URL a la que se redirige
+            const redirectedUrl = window.location.href;
+            console.log(`URL redirigida: ${redirectedUrl}`);
+        }
+
+        // Agregar un evento al botón para ejecutar la función al hacer clic
+        document.getElementById("automateBtn").addEventListener("click", automateCroxyProxy);
+    </script>
 
 </body>
 </html>
