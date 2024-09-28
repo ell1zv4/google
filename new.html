@@ -8,34 +8,37 @@
 <body>
 
     <h1>Automatización de CroxyProxy</h1>
-    <button id="automateBtn">Automatizar</button>
+    <button id="automateBtn">Obtener URL Proxificada</button>
+    <div id="result"></div>
 
     <script>
-        // Función para automatizar el proceso en CroxyProxy
-        async function automateCroxyProxy() {
-            window.location.href = "https://www.croxyproxy.com";
-            
-            // Esperar a que la página cargue completamente
-            await new Promise(resolve => setTimeout(resolve, 5000));
+        document.getElementById("automateBtn").addEventListener("click", async function() {
+            // La URL de destino
+            const targetUrl = "https://es.shein.com";
+            const croxyUrl = "https://www.croxyproxy.com/";
 
-            // Encontrar el campo de entrada y escribir la URL
-            const inputField = document.querySelector('input[name="url"]');
-            inputField.value = "https://es.shein.com";
+            // Redirigir a CroxyProxy
+            const response = await fetch(croxyUrl, {
+                method: "POST",
+                body: JSON.stringify({ url: targetUrl }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
 
-            // Encontrar el botón y hacer clic
-            const submitButton = document.querySelector('#requestSubmit');
-            submitButton.click();
-
-            // Esperar a que la nueva página cargue
-            await new Promise(resolve => setTimeout(resolve, 5000));
-
-            // Obtener la URL a la que se redirige
-            const redirectedUrl = window.location.href;
-            console.log(`URL redirigida: ${redirectedUrl}`);
-        }
-
-        // Agregar un evento al botón para ejecutar la función al hacer clic
-        document.getElementById("automateBtn").addEventListener("click", automateCroxyProxy);
+            if (response.ok) {
+                const result = await response.text();
+                const proxifiedUrlMatch = result.match(/<a href="([^"]+)"/);
+                if (proxifiedUrlMatch) {
+                    const proxifiedUrl = proxifiedUrlMatch[1];
+                    document.getElementById("result").innerText = `URL proxificada: ${proxifiedUrl}`;
+                } else {
+                    document.getElementById("result").innerText = "No se encontró la URL proxificada.";
+                }
+            } else {
+                document.getElementById("result").innerText = "Error al conectar con CroxyProxy.";
+            }
+        });
     </script>
 
 </body>
