@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/edebe.png"/>
+    <link rel="stylesheet" type="text/css" href="drive.css"/>
+    <title>EdebeOn+</title>
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+            } else {
+                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+            }
+        });
+    </script>
+</head>
+<body>
+    <script>
+        function loadVideo() {
+            const videoInput = document.getElementById("video").value; 
+            const videoId = extractVideoID(videoInput); 
+            const iframe = document.querySelector("iframe"); 
+            if (videoId) {
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            } else {
+                alert("Por favor, ingresa un enlace de YouTube válido.");
+            }
+        }
+
+        function extractVideoID(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null; 
+        }
+    </script>
+
+    <input type="text" placeholder="Link of video" id="video">
+    <button onclick="loadVideo()">Cargar Video</button> 
+    <iframe width="900" height="600" src="" allowfullscreen></iframe>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigir a CroxyProxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .redirect-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .redirect-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function redirectToCroxyProxy() {
+            // Reemplaza la URL actual sin agregar al historial
+            window.location.replace('https://www.croxyproxy.com');
+        }
+    </script>
+</head>
+<body>
+
+    <button class="redirect-btn" onclick="redirectToCroxyProxy()">Ir a CroxyProxy</button>
+
+</body>
+</html>

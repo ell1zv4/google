@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive</title>
+    <link rel="icon" type="image/png" href="assets/drive.png"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Coloca el iframe debajo de los divs */
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Altura completa de la ventana */
+            margin: 0;
+            background-color: #383e42; /* Fondo claro para contrastar */
+            visibility: hidden;
+        }
+
+        .divs {
+            height: 300px;
+            width: 300px;
+            background-color: #003366; /* Azul oscuro */
+            display: flex;
+            align-items: center; /* Centra el texto verticalmente */
+            justify-content: center; /* Centra el texto horizontalmente */
+            color: white; /* Color del texto */
+            font-size: 24px; /* Tamaño de la fuente */
+            margin: 10px; /* Espacio entre los divs */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para el efecto visual */
+            cursor: pointer; /* Cambia el cursor al pasar por encima */
+            margin-left: 5%;
+        }
+
+        /* Contenedor de los divs */
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los divs se envuelvan */
+            justify-content: center; /* Centra los divs horizontalmente */
+        }
+
+        .spotify-iframe {
+            display: none; /* Oculta el iframe inicialmente */
+            width: 80%; /* Ancho del iframe */
+            height: 352px; /* Alto del iframe */
+            margin-top: 20px; /* Espacio entre los divs y el iframe */
+            position: relative;
+        }
+
+        .spotify-iframe iframe {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border: 0;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+            } else {
+                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container" id="div-container">
+        <div class="divs" onclick="checkPassword('A.G', 'hola', 'https://open.spotify.com/embed/playlist/2IR4iZaBH1QipDhbWCmj8Y')">A.G</div>
+        <div class="divs" onclick="checkPassword('M.B', 'passB', 'https://open.spotify.com/embed/playlist/37i9dQZF1DXc6c0wWZDeG2?utm_source=oembed')">M.B</div>
+        <div class="divs" onclick="checkPassword('I.P', 'calvo', 'https://open.spotify.com/embed/playlist/37i9dQZF1DWXx3pe11H2fY?utm_source=oembed')">I.P</div>
+        <div class="divs" onclick="checkPassword('A.G', 'passD', 'https://open.spotify.com/embed/playlist/37i9dQZF1DWZxQw8HTP8gx?utm_source=oembed')">A.G</div>
+        <div class="divs" onclick="checkPassword('O.I', 'passE', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX0ZQ92g9H8gO?utm_source=oembed')">O.I</div>
+        <div class="divs" onclick="checkPassword('Ma.P', 'passF', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX5t9nXkC5XbF?utm_source=oembed')">Ma.P</div>
+        <div class="divs" onclick="checkPassword('Mi.P', 'cantoral', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX0n07PpW6oXj?utm_source=oembed')">Mi.P</div>
+        <div class="divs" onclick="checkPassword('J.N', 'passH', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX4m6J7K11lqE?utm_source=oembed')">J.N</div>
+    </div>
+    <div class="spotify-iframe" id="spotify-iframe">
+        <iframe src="" allowfullscreen allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture;"></iframe>
+    </div>
+
+    <script>
+        function checkPassword(name, password, url) {
+            const userPassword = prompt(`Introduce la contraseña para ${name}:`);
+            if (userPassword === password) {
+                // Ocultar los divs
+                document.getElementById('div-container').style.display = 'none';
+                // Cambiar el src del iframe a la URL de Spotify correspondiente
+                const iframe = document.querySelector('.spotify-iframe iframe');
+                iframe.src = url; // Establecer la URL del iframe
+                document.getElementById('spotify-iframe').style.display = 'block'; // Muestra el iframe
+            } else {
+                alert('Contraseña incorrecta. Intenta nuevamente.');
+            }
+        }
+    </script>
+</body>
+</html>

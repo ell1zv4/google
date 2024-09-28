@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>Google</title>
+    <link rel="icon" type="image/png" href="assets/google-favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let inputSequence = '';
+            const requiredSequence = 'athletic';
+
+            document.addEventListener('keydown', (event) => {
+                inputSequence += event.key.toLowerCase();
+
+                // Limitar la longitud de la secuencia
+                if (inputSequence.length > requiredSequence.length) {
+                    inputSequence = inputSequence.slice(-requiredSequence.length);
+                }
+
+                // Verificar si la secuencia es correcta
+                if (inputSequence === requiredSequence) {
+                    sessionStorage.setItem('authenticated', 'true'); // Autenticado
+
+                    // Redirigir a search.html sin guardar en el historial
+                    window.location.replace('search.html'); // Reemplaza la URL actual en lugar de añadir una nueva entrada
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <ul class="header__list">
+            <li class="header__list-item"><a href="#" class="header__link">Gmail</a></li>
+            <li class="header__list-item"><a href="#" class="header__link">Imagenes</a></li>
+            <li class="header__list-item"><a href="#" class="header__link simple-button-1">Iniciar sesión</a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section class="logo-container">
+            <img class="logo-img" src="assets/google-logo.png" alt="Google"/>
+        </section>
+        <section class="search-bar">
+            <div class="search-bar__text-container">
+                <img class="search-bar__search-icon" src="assets/magnifying-glass-icon.png"/>
+                <input class="search-bar__text-input" type="text" id="search-bar"/>
+            </div>
+            <div class="search-bar__buttons-container">
+                <input class="search-bar__button" type="submit" value="Buscar con Google" onclick="searchWithGoogle()"/>
+                <input class="search-bar__button" type="submit" value="Tendencias de hoy" onclick="trendingToday()"/>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <section class="footer__section footer__section--bottom-line">
+            <span class="footer__language">Spain</span>
+        </section>
+        <nav class="footer__section footer__section--spaced-items">
+            <ul class="footer__list">
+                <li class="footer__list-item"><a class="footer__link" href="#">Sobre Google</a></li>
+                <li class="footer__list-item"><a class="footer__link" href="#">Publicidad</a></li>
+                <li class="footer__list-item"><a class="footer__link" href="#">Negocios</a></li>
+                <li class="footer__list-item"><a class="footer__link" href="#">Cómo funciona la búsqueda</a></li>
+            </ul>
+            <ul class="footer__list">
+                <li class="footer__list-item"><a class="footer__link" href="#">Privacidad</a></li>
+                <li class="footer__list-item"><a class="footer__link" href="#">Condiciones</a></li>
+                <li class="footer__list-item footer__list-item--no-margin-right"><a class="footer__link" href="#">Preferencias</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script>
+        function searchWithGoogle() {
+            // Aquí puedes agregar lógica para buscar con Google
+            window.location.replace('search_results.html'); // Ejemplo de redirección
+        }
+
+        function trendingToday() {
+            // Aquí puedes agregar lógica para mostrar tendencias de hoy
+            window.location.replace('trending_today.html'); // Ejemplo de redirección
+        }
+    </script>
+</body>
+</html>

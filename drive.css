@@ -1,0 +1,63 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #383e42;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo del título */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo del input de video */
+input[type="text"] {
+    width: 400px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007BFF; /* Cambia el color del borde al enfocar */
+    outline: none;
+}
+
+/* Estilo del botón */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF; /* Color de fondo */
+    color: white; /* Color del texto */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+}
+
+/* Estilo del iframe */
+iframe {
+    margin-top: 20px;
+    border: 2px solid #ccc; /* Borde del iframe */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+    input[type="text"] {
+        width: 90%; /* Ancho del input en pantallas pequeñas */
+    }
+}

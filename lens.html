@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/gmail.png"/>
+    <title>Gmail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #383e42;
+            visibility: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #333;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .game-item {
+            background-color: #fff;
+            width: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .game-item p {
+            text-align: center;
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 80%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .iframe-container iframe {
+                width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+            } else {
+                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-world-online')">
+            <img src="assets/super-mario-world.jpg" alt="Super Mario World Online">
+            <p>Super Mario World Online</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/cashier-3d')">
+            <img src="assets/cashier3d.jpg" alt="Cashier 3D">
+            <p>Cashier 3D</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/uno')">
+            <img src="assets/uno.svg" alt="UNO">
+            <p>UNO</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/1v1-lol')">
+            <img src="assets/1v1lol.avif" alt="1v1 LOL">
+            <p>1v1 LOL</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/plants-vs-zombies')">
+            <img src="assets/plantas-contra-zombies.jpg" alt="Plants vs Zombies">
+            <p>Plants vs Zombies</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/juego/super-star-car')">
+            <img src="assets/super-star-car.avif" alt="Super Star Car">
+            <p>Super Star Car</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/geometry-dash')">
+            <img src="assets/geometry-dash.png" alt="Geometry Dash">
+            <p>Geometry Dash</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/bloxd-io')">
+            <img src="assets/bloxd-io.avif" alt="Bloxd.io">
+            <p>Bloxd.io</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/five-nights-at-freddys')">
+            <img src="assets/five-nights-at-freddy.png" alt="Five Nights at Freddy's">
+            <p>Five Nights at Freddy's</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/run-3')">
+            <img src="assets/run3.avif" alt="Run 3">
+            <p>Run 3</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/idle-factory')">
+            <img src="assets/idle-factory.png" alt="Idle Factory">
+            <p>Idle Factory</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/happy-wheels')">
+            <img src="assets/happy-wheels.avif" alt="Happy Wheels">
+            <p>Happy Wheels</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/the-torture-game-2x')">
+            <img src="assets/torture-game.jpg" alt="Torture Game">
+            <p>Torture Game</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/hot-dog-bush')">
+            <img src="assets/hot-dug-bush.jpg" alt="Hot Dug Bush">
+            <p>Hot Dug Bush</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/basketball-smash')">
+            <img src="assets/basketball-smash.jpg" alt="Basketball Smash">
+            <p>Basketball Smash</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/plague-inc-pandemic-simulator')">
+            <img src="assets/plague-pandemic-simulator.jpg" alt="Plague Pandemic Simulator">
+            <p>Plague Pandemic Simulator</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/pinturillo-2')">
+            <img src="assets/pinturillo2.png" alt="Pinturillo 2">
+            <p>Pinturillo 2</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/paper-io')">
+            <img src="assets/paper.jpg" alt="Paper.io">
+            <p>Paper.io</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/tetris-i1240')">
+            <img src="assets/tetris.png" alt="Five Nights at Freddy's">
+            <p>Tetris</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/call-of-war')">
+            <img src="assets/call-of-war.jpg" alt="Five Nights at Freddy's">
+            <p>Call of War</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-kart')">
+            <img src="assets/super-mario-kart.jpg" alt="Super Mario Kart">
+            <p>Super Mario Kart</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/madness-sherrifs-compound')">
+            <img src="assets/madness.jpg" alt="Madness Sherrifs">
+            <p>Madness Sherrifs</p>
+        </div>
+    </div>
+
+    <div class="iframe-container" id="iframe-container">
+        <!-- El iframe del juego seleccionado se cargará aquí -->
+    </div>
+
+    <script>
+        function loadGame(url) {
+            const iframeContainer = document.getElementById('iframe-container');
+            iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
+        }
+    </script>
+</body>
+</html>

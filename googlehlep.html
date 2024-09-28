@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educamos - Home</title>
+    <link rel="icon" type="image/png" href="assets/educamos.png"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Altura completa de la ventana */
+            background-color: #383e42;
+            font-family: Arial, sans-serif;
+            visibility: hidden;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        iframe {
+            width: 80%;
+            height: 80%; /* Cambia la altura según sea necesario */
+            border: 2px solid #ccc; /* Bordes del iframe */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+            } else {
+                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+            }
+        });
+    </script>
+</head>
+<body>
+    <input type="text" id="urlInput" placeholder="Introduce la URL aquí" />
+    <button id="loadButton">Cargar URL</button>
+    <iframe id="contentIframe" src="" title="Iframe"></iframe>
+
+    <script>
+        const loadButton = document.getElementById('loadButton');
+        const urlInput = document.getElementById('urlInput');
+        const contentIframe = document.getElementById('contentIframe');
+
+        loadButton.onclick = function() {
+            const url = urlInput.value;
+            if (url) {
+                contentIframe.src = url; // Cambia el src del iframe
+            }
+        };
+
+        contentIframe.addEventListener('load', () => {
+            const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
+            interceptLinks(iframeDocument);
+        });
+
+        function interceptLinks(iframeDocument) {
+            // Asegúrate de que puedas acceder al documento del iframe
+            try {
+                // Captura todos los enlaces
+                const links = iframeDocument.getElementsByTagName('a');
+                for (let link of links) {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault(); // Evita que el enlace se abra en una nueva ventana
+                        const href = link.getAttribute('href');
+                        if (href) {
+                            contentIframe.src = href; // Cambia el src del iframe
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error("No se pudo acceder al documento del iframe:", error);
+            }
+        }
+
+        // Bloquea enlaces que intenten abrirse fuera del iframe
+        document.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target.tagName === 'A') {
+                event.preventDefault(); // Previene la acción predeterminada
+                const href = target.getAttribute('href');
+                if (href) {
+                    contentIframe.src = href; // Carga el enlace en el iframe
+                }
+            }
+        });
+    </script>
+</body>
+</html>
