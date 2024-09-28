@@ -30,28 +30,40 @@
 
         .divs {
             background-color: #4b545a;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            display: flex;               /* Agregado para utilizar Flexbox */
-            justify-content: center;     /* Centra horizontalmente */
-            align-items: center;         /* Centra verticalmente */
-            height: 200px;              /* Altura fija para ayudar en el centrado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
         }
 
+        /* Efecto hover */
+        .divs:hover {
+            transform: scale(1.05);  /* Efecto de expansión suave */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);  /* Sombra más pronunciada */
+            background: linear-gradient(135deg, #4e555b, #6b7379);  /* Fondo con gradiente al hacer hover */
+        }
+
+        /* Imágenes dentro de los divs */
         .divs img {
-            width: 80%;                 /* Ajustar el tamaño de la imagen */
+            width: 80%;  /* Ajustar el tamaño de la imagen */
             height: auto;
             display: block;
             border-radius: 10px;
+            transition: transform 0.4s ease;  /* Transición suave para las imágenes */
         }
 
-        .divs:hover {
-            background-color: #5b6268;
+        /* Imagen más grande en hover */
+        .divs:hover img {
+            transform: scale(1.1);  /* Imagen crece ligeramente en hover */
         }
 
+        /* Responsividad: ajuste de columnas según el tamaño de la pantalla */
         @media(max-width: 768px) {
             .carteles {
                 grid-template-columns: 1fr 1fr;
