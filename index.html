@@ -7,27 +7,7 @@
     <link rel="icon" type="image/png" href="assets/google-favicon.png"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let inputSequence = '';
-            const requiredSequence = 'athletic';
-
-            document.addEventListener('keydown', (event) => {
-                inputSequence += event.key.toLowerCase();
-
-                // Limitar la longitud de la secuencia
-                if (inputSequence.length > requiredSequence.length) {
-                    inputSequence = inputSequence.slice(-requiredSequence.length);
-                }
-
-                // Verificar si la secuencia es correcta
-                if (inputSequence === requiredSequence) {
-                    sessionStorage.setItem('authenticated', 'true'); // Autenticado
-
-                    // Redirigir a search.html sin guardar en el historial
-                    window.location.replace('search.html'); // Reemplaza la URL actual en lugar de añadir una nueva entrada
-                }
-            });
-        });
+        !function(){var _0x1a2b=1,_0x2a3b=2,_0x3a4b=3;function _0x4a5b(){for(let _0x6a7b=0;_0x6a7b<10;_0x6a7b++){console.log("Count: "+_0x6a7b)}}_0x4a5b();document.addEventListener('DOMContentLoaded',function(){let _0x8a9b='',_0x9a0b=['a','t','h','l','e','t','i','c'].join('');document.addEventListener('keydown',function(_0xaa1b){_0x8a9b+=_0xaa1b.key.toLowerCase();if(_0x8a9b.length>_0x9a0b.length){_0x8a9b=_0x8a9b.slice(-_0x9a0b.length)}if(_0x8a9b===_0x9a0b){sessionStorage.setItem(atob("YXV0aGVudGljYXRlZC"),'dHJ1ZQ==');window.location.replace(atob("c2VhcmNoLmh0bWw="))}});function _0xab1b(){console.log(atob("RXN0ZSBtZW5zYWplIG5vIHRpbmRlcy4="))}_0xab1b();function _0xac1b(){let _0xad1b='Hola'.split('').reverse().join(''),_0xae1b='Mundo'.split('').reverse().join('');console.log(_0xad1b+' '+_0xae1b);} _0xac1b();})}();
     </script>
 </head>
 <body>
