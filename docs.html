@@ -5,56 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drive</title>
     <link rel="icon" type="image/png" href="assets/drive.png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
-            flex-direction: column; /* Coloca el iframe debajo de los divs */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; /* Altura completa de la ventana */
+            height: 100vh;
             margin: 0;
-            background-color: #383e42; /* Fondo claro para contrastar */
+            background-color: #f4f4f9;
+            font-family: 'Poppins', sans-serif;
             visibility: hidden;
         }
 
         .divs {
-            height: 300px;
-            width: 300px;
-            background-color: #003366; /* Azul oscuro */
+            height: 250px;
+            width: 250px;
+            background-color: #f5f5f5;
+            color: #333;
             display: flex;
-            align-items: center; /* Centra el texto verticalmente */
-            justify-content: center; /* Centra el texto horizontalmente */
-            color: white; /* Color del texto */
-            font-size: 24px; /* Tamaño de la fuente */
-            margin: 10px; /* Espacio entre los divs */
-            border-radius: 10px; /* Bordes redondeados */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra para el efecto visual */
-            cursor: pointer; /* Cambia el cursor al pasar por encima */
-            margin-left: 5%;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .divs:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* Contenedor de los divs */
         .container {
             display: flex;
-            flex-wrap: wrap; /* Permite que los divs se envuelvan */
-            justify-content: center; /* Centra los divs horizontalmente */
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 80%;
         }
 
         .spotify-iframe {
-            display: none; /* Oculta el iframe inicialmente */
-            width: 80%; /* Ancho del iframe */
-            height: 352px; /* Alto del iframe */
-            margin-top: 20px; /* Espacio entre los divs y el iframe */
-            position: relative;
+            display: none;
+            width: 90%;
+            height: 400px;
+            margin-top: 40px;
         }
 
         .spotify-iframe iframe {
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            position: absolute;
-            border: 0;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 40px;
         }
     </style>
     <script>
@@ -70,6 +83,7 @@
     </script>
 </head>
 <body>
+    <h1>Selecciona tu Playlist</h1>
     <div class="container" id="div-container">
         <div class="divs" onclick="checkPassword('A.G', 'hola', 'https://open.spotify.com/embed/playlist/2IR4iZaBH1QipDhbWCmj8Y')">A.G</div>
         <div class="divs" onclick="checkPassword('M.B', 'passB', 'https://open.spotify.com/embed/playlist/37i9dQZF1DXc6c0wWZDeG2?utm_source=oembed')">M.B</div>
@@ -92,8 +106,8 @@
                 document.getElementById('div-container').style.display = 'none';
                 // Cambiar el src del iframe a la URL de Spotify correspondiente
                 const iframe = document.querySelector('.spotify-iframe iframe');
-                iframe.src = url; // Establecer la URL del iframe
-                document.getElementById('spotify-iframe').style.display = 'block'; // Muestra el iframe
+                iframe.src = url;
+                document.getElementById('spotify-iframe').style.display = 'block';
             } else {
                 alert('Contraseña incorrecta. Intenta nuevamente.');
             }
