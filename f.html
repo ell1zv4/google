@@ -6,69 +6,117 @@
     <title>Gmail</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #f5f5f5;
+            background-color: #f0f2f5;
             padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
 
         .button-container {
             display: flex;
             flex-direction: column;
             width: 80%;
+            max-width: 900px;
         }
 
         .drive-button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
             background-color: #4b72ff;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 20px;
             margin: 10px 0;
             font-size: 18px;
-            text-align: center;
+            text-align: left;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 12px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .drive-button:hover {
             background-color: #3b61e0;
-            transform: scale(1.05);
+            transform: scale(1.02);
+        }
+
+        .drive-button img {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            border-radius: 50%;
         }
 
         .iframe-container {
             width: 80%;
+            max-width: 900px;
             height: 500px;
             margin-top: 30px;
             display: none;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            overflow: hidden;
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <div class="button-container">
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1wCJ-T18fOGwcDgLy7xtoLAje4LoAM3wQ/preview')">La delgada línea roja</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1LysAWh3wnjZoRAIeHYrjRdbsHtUmvaFu/preview')">Salvar al soldado Ryan</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/14QeoN6JlOwWdn3sB-mVBr9eur8Gfagst/preview')">La Caída del Halcón Negro</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1mPCgktb7havTjgMPRk0eF7AGkxqWnpae/preview')">La Conquista de Honor</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1rBqzhvhFQVr-moZbDBqtZSqPhsuMhmAw/preview')">Corazones de Hierro</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1c7vgfFN3Iho82bfnC2CfNixIMpNQ9erK/preview')">Hombre Muerto</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1_jzWE15j7sgDrlNObC4ZSKLgh8QuHPxa/preview')">Hasta el último hombre</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1I-BIZdPDGhURCcGx1HKzxGzQWwKRwo4E/preview')">Dunkerque</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1g-lyE7mHhpnzA-rCgjo191Tc4I2A-oBp/preview')">Maquina de guerra</button>
-        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1tpTWgVZpfJrhTSdQZGLYZc79GatOuNpz/preview')">Renegade</button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1wCJ-T18fOGwcDgLy7xtoLAje4LoAM3wQ/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="La delgada línea roja">
+            La delgada línea roja
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1LysAWh3wnjZoRAIeHYrjRdbsHtUmvaFu/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Salvar al soldado Ryan">
+            Salvar al soldado Ryan
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/14QeoN6JlOwWdn3sB-mVBr9eur8Gfagst/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="La Caída del Halcón Negro">
+            La Caída del Halcón Negro
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1mPCgktb7havTjgMPRk0eF7AGkxqWnpae/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="La Conquista de Honor">
+            La Conquista de Honor
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1rBqzhvhFQVr-moZbDBqtZSqPhsuMhmAw/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Corazones de Hierro">
+            Corazones de Hierro
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1c7vgfFN3Iho82bfnC2CfNixIMpNQ9erK/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Hombre Muerto">
+            Hombre Muerto
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1_jzWE15j7sgDrlNObC4ZSKLgh8QuHPxa/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Hasta el último hombre">
+            Hasta el último hombre
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1I-BIZdPDGhURCcGx1HKzxGzQWwKRwo4E/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Dunkerque">
+            Dunkerque
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1g-lyE7mHhpnzA-rCgjo191Tc4I2A-oBp/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Maquina de guerra">
+            Maquina de guerra
+        </button>
+        <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1tpTWgVZpfJrhTSdQZGLYZc79GatOuNpz/preview')">
+            <img src="https://image-placeholder.com/images/50x50.png" alt="Renegade">
+            Renegade
+        </button>
     </div>
 
     <div class="iframe-container" id="iframeContainer">
@@ -83,6 +131,5 @@
             iframeContainer.style.display = 'block';
         }
     </script>
-
 </body>
 </html>
