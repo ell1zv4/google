@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <title>Lengua y Literatura 2024-2025 4°</title>
     <style>
+        /* Estilos generales */
         body {
             margin: 0;
             padding: 0;
@@ -16,10 +17,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             visibility: hidden;
         }
 
+        /* Contenedor de carteles */
         .carteles {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -28,10 +31,11 @@
             max-width: 1200px;
         }
 
+        /* Estilos de los divs */
         .divs {
             background-color: #4b545a;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra suave inicial */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             position: relative;
             cursor: pointer;
@@ -39,28 +43,28 @@
             justify-content: center;
             align-items: center;
             height: 200px;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.6s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Efecto hover */
         .divs:hover {
-            background-color: #626a70;  /* Cambio sutil de fondo */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Sombra más suave y profunda */
-            transform: scale(1.1);  /* Expansión delicada */
+            background-color: #626a70;  
+            box-shadow: 0 15px 40px rgba(0, 150, 255, 0.5); /* Sombra azul */
+            transform: scale(1.05);  
         }
 
-        /* Imágenes */
+        /* Imágenes dentro de los divs */
         .divs img {
             width: 80%;
             height: auto;
             display: block;
             border-radius: 12px;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);  /* Transición suave */
+            transition: transform 0.3s ease;  
         }
 
-        /* Imagen más grande en hover */
+        /* Crecimiento de imagen en hover */
         .divs:hover img {
-            transform: scale(1.12);  /* Crecimiento sutil */
+            transform: scale(1.1);  
         }
 
         /* Responsividad: ajuste de columnas según el tamaño de la pantalla */
@@ -99,28 +103,28 @@
 <body>
     <div class="carteles">
         <div class="minijuegos divs" data-link="lens.html">
-            <img src="assets/minijuegos.png" alt="Minijuegos">
+            <img src="https://img.icons8.com/color/96/gaming.png" alt="Minijuegos">
         </div>
         <div class="youtube divs" data-link="drive.html">
-            <img src="assets/youtube.png" alt="YouTube">
+            <img src="https://img.icons8.com/color/96/youtube.png" alt="YouTube">
         </div>
         <div class="spotify divs" data-link="googlehelp.html">
-            <img src="assets/rojadirecta.png" alt="Ja">
+            <img src="https://img.icons8.com/color/96/spotify.png" alt="Spotify">
         </div>
         <div class="game1 divs" data-link="docs.html">
-            <img src="assets/spotify.png" alt="Ja">
+            <img src="https://img.icons8.com/color/96/game-controller.png" alt="Juegos">
         </div>
         <div class="game2 divs" data-link="class.html">
-            <img src="assets/image.png" alt="chatgpt">
+            <img src="https://img.icons8.com/color/96/chatgpt.png" alt="ChatGPT">
         </div>
         <div class="divs" data-link="new.html">
-            <img src="assets/game3.png" alt="Proxy">
+            <img src="https://img.icons8.com/color/96/new.png" alt="Nuevo">
         </div>
         <div class="divs" data-link="fail.html">
-            <img src="assets/important.png" alt="tiroalpalotv">
+            <img src="https://img.icons8.com/color/96/error.png" alt="Error">
         </div>
         <div class="divs" data-link="f.html">
-            <img src="assets/pelis.png" alt="Peliculas">
+            <img src="https://img.icons8.com/color/96/movie.png" alt="Peliculas">
         </div>
     </div>
 </body>
