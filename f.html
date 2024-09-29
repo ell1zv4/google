@@ -12,14 +12,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #f0f4f8;
+            background-color: #383e42;
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: #e5e5e5;
         }
 
         h1 {
-            color: #222;
+            color: #ffffff;
             font-weight: 700;
             margin-bottom: 20px;
             font-size: 2.5rem;
@@ -34,13 +34,13 @@
             max-width: 900px;
         }
 
-        /* Botones con estilo elegante */
+        /* Botones estilizados */
         .drive-button {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background-color: #ffffff;
-            color: #4a4a4a;
+            background-color: #4a5258;
+            color: #ffffff;
             border: none;
             padding: 20px;
             margin: 15px 0;
@@ -49,14 +49,14 @@
             cursor: pointer;
             border-radius: 12px;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilos de hover para los botones */
+        /* Hover con sombras e interacción visual */
         .drive-button:hover {
-            background-color: #f9f9f9;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+            background-color: #61696f;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
         }
 
         /* Imagenes dentro de los botones */
@@ -68,7 +68,7 @@
             object-fit: cover;
         }
 
-        /* Contenedor del iframe con estilo mejorado */
+        /* Contenedor del iframe */
         .iframe-container {
             width: 80%;
             max-width: 900px;
@@ -78,7 +78,6 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             border-radius: 15px;
             overflow: hidden;
-            background-color: white;
         }
 
         /* Estilos del iframe */
@@ -88,7 +87,7 @@
             border: none;
         }
 
-        /* Animación de fade in */
+        /* Animación fade in */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -108,43 +107,43 @@
 <body>
     <div class="button-container">
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1wCJ-T18fOGwcDgLy7xtoLAje4LoAM3wQ/preview')">
-            <img src="https://img.icons8.com/ios/100/000000/red-circle.png" alt="La delgada línea roja">
+            <img src="https://img.icons8.com/ios-filled/100/FF0000/circle.png" alt="La delgada línea roja">
             La delgada línea roja
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1LysAWh3wnjZoRAIeHYrjRdbsHtUmvaFu/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/soldier.png" alt="Salvar al soldado Ryan">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/soldier.png" alt="Salvar al soldado Ryan">
             Salvar al soldado Ryan
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/14QeoN6JlOwWdn3sB-mVBr9eur8Gfagst/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/helicopter.png" alt="La Caída del Halcón Negro">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/helicopter.png" alt="La Caída del Halcón Negro">
             La Caída del Halcón Negro
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1mPCgktb7havTjgMPRk0eF7AGkxqWnpae/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/flag.png" alt="La Conquista de Honor">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/flag.png" alt="La Conquista de Honor">
             La Conquista de Honor
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1rBqzhvhFQVr-moZbDBqtZSqPhsuMhmAw/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/tank.png" alt="Corazones de Hierro">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/tank.png" alt="Corazones de Hierro">
             Corazones de Hierro
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1c7vgfFN3Iho82bfnC2CfNixIMpNQ9erK/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/skull.png" alt="Hombre Muerto">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/skull.png" alt="Hombre Muerto">
             Hombre Muerto
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1_jzWE15j7sgDrlNObC4ZSKLgh8QuHPxa/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/cross.png" alt="Hasta el último hombre">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/cross.png" alt="Hasta el último hombre">
             Hasta el último hombre
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1I-BIZdPDGhURCcGx1HKzxGzQWwKRwo4E/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/war.png" alt="Dunkerque">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/war.png" alt="Dunkerque">
             Dunkerque
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1g-lyE7mHhpnzA-rCgjo191Tc4I2A-oBp/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/engineer.png" alt="Maquina de guerra">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/engineer.png" alt="Maquina de guerra">
             Maquina de guerra
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1tpTWgVZpfJrhTSdQZGLYZc79GatOuNpz/preview')">
-            <img src="https://img.icons8.com/ios-filled/100/000000/rebel.png" alt="Renegade">
+            <img src="https://img.icons8.com/ios-filled/100/FFFFFF/rebel.png" alt="Renegade">
             Renegade
         </button>
     </div>
