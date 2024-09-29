@@ -26,10 +26,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 64px; /* Tamaño del texto mucho más grande */
-            font-weight: bold; /* Texto grueso */
+            font-size: 64px;
+            font-weight: bold;
             color: white;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Sombra para dar efecto de relieve */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
             margin: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Contenedor de los divs */
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -75,44 +74,39 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const isAuthenticated = sessionStorage.getItem('authenticated');
-            
             if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+                window.location.href = 'https://www.google.com'; // Redirigir si no está autenticado
             } else {
-                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+                document.body.style.visibility = 'visible'; // Mostrar si está autenticado
             }
         });
     </script>
 </head>
 <body>
     <div class="container" id="div-container">
-        <div class="divs" onclick="checkPassword('A.G', 'hola', 'https://open.spotify.com/embed/playlist/2IR4iZaBH1QipDhbWCmj8Y')">A.G</div>
-        <div class="divs" onclick="checkPassword('M.B', 'passB', 'https://open.spotify.com/embed/playlist/37i9dQZF1DXc6c0wWZDeG2?utm_source=oembed')">M.B</div>
-        <div class="divs" onclick="checkPassword('I.P', 'calvo', 'https://open.spotify.com/embed/playlist/37i9dQZF1DWXx3pe11H2fY?utm_source=oembed')">I.P</div>
-        <div class="divs" onclick="checkPassword('A.G', 'passD', 'https://open.spotify.com/embed/playlist/37i9dQZF1DWZxQw8HTP8gx?utm_source=oembed')">A.G</div>
-        <div class="divs" onclick="checkPassword('O.I', 'passE', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX0ZQ92g9H8gO?utm_source=oembed')">O.I</div>
-        <div class="divs" onclick="checkPassword('Ma.P', 'passF', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX5t9nXkC5XbF?utm_source=oembed')">Ma.P</div>
-        <div class="divs" onclick="checkPassword('Mi.P', 'cantoral', 'https://open.spotify.com/embed/playlist/37i9dQZF1DX0n07PpW6oXj?utm_source=oembed')">Mi.P</div>
-        <div class="divs" onclick="checkPassword('J.M', 'neymar', 'https://open.spotify.com/embed/playlist/1CfqnnakbZpZb2OglrxTx6?si=JXquGHmgTtG6rJ6mOCv0AQ&pi=pTiqlgVjTGeU2')">J.N</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/2IR4iZaBH1QipDhbWCmj8Y">A.G</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DXc6c0wWZDeG2">M.B</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DWXx3pe11H2fY">I.P</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DWZxQw8HTP8gx">A.G</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DX0ZQ92g9H8gO">O.I</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DX5t9nXkC5XbF">Ma.P</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/37i9dQZF1DX0n07PpW6oXj">Mi.P</div>
+        <div class="divs" data-url="https://open.spotify.com/embed/playlist/1CfqnnakbZpZb2OglrxTx6?si=JXquGHmgTtG6rJ6mOCv0AQ&pi=pTiqlgVjTGeU2">J.N</div>
     </div>
     <div class="spotify-iframe" id="spotify-iframe">
         <iframe src="" allowfullscreen allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture;"></iframe>
     </div>
 
     <script>
-        function checkPassword(name, password, url) {
-            const userPassword = prompt(`Introduce la contraseña para ${name}:`);
-            if (userPassword === password) {
-                // Ocultar los divs
+        document.querySelectorAll('.divs').forEach(div => {
+            div.addEventListener('click', () => {
+                const url = div.getAttribute('data-url');
                 document.getElementById('div-container').style.display = 'none';
-                // Cambiar el src del iframe a la URL de Spotify correspondiente
                 const iframe = document.querySelector('.spotify-iframe iframe');
                 iframe.src = url;
                 document.getElementById('spotify-iframe').style.display = 'block';
-            } else {
-                alert('Contraseña incorrecta. Intenta nuevamente.');
-            }
-        }
+            });
+        });
     </script>
 </body>
 </html>
