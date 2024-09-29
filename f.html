@@ -5,22 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gmail</title>
     <style>
+        /* Estilos generales */
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #f0f2f5;
+            background-color: #f0f4f8;
+            margin: 0;
             padding: 20px;
+            color: #333;
         }
 
         h1 {
-            color: #333;
+            color: #222;
             font-weight: 700;
             margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-align: center;
         }
 
+        /* Contenedor de los botones */
         .button-container {
             display: flex;
             flex-direction: column;
@@ -28,98 +34,122 @@
             max-width: 900px;
         }
 
+        /* Botones con estilo elegante */
         .drive-button {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background-color: #4b72ff;
-            color: white;
+            background-color: #ffffff;
+            color: #4a4a4a;
             border: none;
             padding: 20px;
-            margin: 10px 0;
+            margin: 15px 0;
             font-size: 18px;
             text-align: left;
             cursor: pointer;
             border-radius: 12px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
         }
 
+        /* Estilos de hover para los botones */
         .drive-button:hover {
-            background-color: #3b61e0;
-            transform: scale(1.02);
+            background-color: #f9f9f9;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
         }
 
+        /* Imagenes dentro de los botones */
         .drive-button img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             margin-right: 20px;
-            border-radius: 50%;
+            border-radius: 10px;
+            object-fit: cover;
         }
 
+        /* Contenedor del iframe con estilo mejorado */
         .iframe-container {
             width: 80%;
             max-width: 900px;
             height: 500px;
             margin-top: 30px;
             display: none;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
             overflow: hidden;
+            background-color: white;
         }
 
+        /* Estilos del iframe */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        /* Animación de fade in */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <div class="button-container">
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1wCJ-T18fOGwcDgLy7xtoLAje4LoAM3wQ/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="La delgada línea roja">
+            <img src="https://img.icons8.com/ios/100/000000/red-circle.png" alt="La delgada línea roja">
             La delgada línea roja
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1LysAWh3wnjZoRAIeHYrjRdbsHtUmvaFu/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Salvar al soldado Ryan">
+            <img src="https://img.icons8.com/ios-filled/100/000000/soldier.png" alt="Salvar al soldado Ryan">
             Salvar al soldado Ryan
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/14QeoN6JlOwWdn3sB-mVBr9eur8Gfagst/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="La Caída del Halcón Negro">
+            <img src="https://img.icons8.com/ios-filled/100/000000/helicopter.png" alt="La Caída del Halcón Negro">
             La Caída del Halcón Negro
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1mPCgktb7havTjgMPRk0eF7AGkxqWnpae/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="La Conquista de Honor">
+            <img src="https://img.icons8.com/ios-filled/100/000000/flag.png" alt="La Conquista de Honor">
             La Conquista de Honor
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1rBqzhvhFQVr-moZbDBqtZSqPhsuMhmAw/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Corazones de Hierro">
+            <img src="https://img.icons8.com/ios-filled/100/000000/tank.png" alt="Corazones de Hierro">
             Corazones de Hierro
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1c7vgfFN3Iho82bfnC2CfNixIMpNQ9erK/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Hombre Muerto">
+            <img src="https://img.icons8.com/ios-filled/100/000000/skull.png" alt="Hombre Muerto">
             Hombre Muerto
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1_jzWE15j7sgDrlNObC4ZSKLgh8QuHPxa/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Hasta el último hombre">
+            <img src="https://img.icons8.com/ios-filled/100/000000/cross.png" alt="Hasta el último hombre">
             Hasta el último hombre
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1I-BIZdPDGhURCcGx1HKzxGzQWwKRwo4E/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Dunkerque">
+            <img src="https://img.icons8.com/ios-filled/100/000000/war.png" alt="Dunkerque">
             Dunkerque
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1g-lyE7mHhpnzA-rCgjo191Tc4I2A-oBp/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Maquina de guerra">
+            <img src="https://img.icons8.com/ios-filled/100/000000/engineer.png" alt="Maquina de guerra">
             Maquina de guerra
         </button>
         <button class="drive-button" onclick="loadIframe('https://drive.google.com/file/d/1tpTWgVZpfJrhTSdQZGLYZc79GatOuNpz/preview')">
-            <img src="https://image-placeholder.com/images/50x50.png" alt="Renegade">
+            <img src="https://img.icons8.com/ios-filled/100/000000/rebel.png" alt="Renegade">
             Renegade
         </button>
     </div>
 
-    <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-container fade-in" id="iframeContainer">
         <iframe id="driveIframe" src=""></iframe>
     </div>
 
@@ -129,6 +159,7 @@
             const iframe = document.getElementById('driveIframe');
             iframe.src = url;
             iframeContainer.style.display = 'block';
+            iframeContainer.classList.add('fade-in');
         }
     </script>
 </body>
