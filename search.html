@@ -41,7 +41,7 @@
             justify-content: center;
             align-items: center;
             height: 200px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease; /* Transiciones para hover */
         }
 
         /* Efecto hover */
@@ -49,6 +49,7 @@
             background-color: #626a70;  
             box-shadow: 0 0 20px rgba(0, 150, 255, 0.6), 0 0 40px rgba(0, 150, 255, 0.4); /* Sombra azul de neón */
             transform: scale(1.05);  
+            outline: none; /* Sin borde visible */
         }
 
         /* Imágenes */
