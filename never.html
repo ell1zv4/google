@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda personalizada en DuckDuckGo</title>
+    <style>
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Búsqueda en DuckDuckGo</h1>
+    <form onsubmit="return buscar(event);">
+        <input type="text" id="query" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+    </form>
+    <iframe id="result-frame" src=""></iframe>
+
+    <script>
+        function buscar(event) {
+            event.preventDefault();
+            const query = document.getElementById('query').value;
+            const url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+            document.getElementById('result-frame').src = url;
+        }
+    </script>
+</body>
+</html>
