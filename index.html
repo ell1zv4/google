@@ -1,67 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-    <title>Google</title>
-    <link rel="icon" type="image/png" href="assets/google-favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script>
-        !function(){var _0x1a2b=1,_0x2a3b=2,_0x3a4b=3;function _0x4a5b(){for(let _0x6a7b=0;_0x6a7b<10;_0x6a7b++){console.log("Count: "+_0x6a7b)}}_0x4a5b();document.addEventListener('DOMContentLoaded',function(){let _0x8a9b='',_0x9a0b=['a','t','h','l','e','t','i','c'].join('');document.addEventListener('keydown',function(_0xaa1b){_0x8a9b+=_0xaa1b.key.toLowerCase();if(_0x8a9b.length>_0x9a0b.length){_0x8a9b=_0x8a9b.slice(-_0x9a0b.length)}if(_0x8a9b===_0x9a0b){sessionStorage.setItem(atob("YXV0aGVudGljYXRlZC"),atob("dHJ1ZQ=="));window.location.replace(atob("c2VhcmNoLmh0bWw="))}});function _0xab1b(){console.log(atob("RXN0ZSBtZW5zYWplIG5vIHRpbmRlcy4="))}_0xab1b();function _0xac1b(){let _0xad1b='Hola'.split('').reverse().join(''),_0xae1b='Mundo'.split('').reverse().join('');console.log(_0xad1b+' '+_0xae1b);} _0xac1b();})}();
-    </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <title>Google</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <script>        !function(){var _0x1a2b=1,_0x2a3b=2,_0x3a4b=3;function _0x4a5b(){for(let _0x6a7b=0;_0x6a7b<10;_0x6a7b++){console.log("Count: "+_0x6a7b)}}_0x4a5b();document.addEventListener('DOMContentLoaded',function(){let _0x8a9b='',_0x9a0b=['a','t','h','l','e','t','i','c'].join('');document.addEventListener('keydown',function(_0xaa1b){_0x8a9b+=_0xaa1b.key.toLowerCase();if(_0x8a9b.length>_0x9a0b.length){_0x8a9b=_0x8a9b.slice(-_0x9a0b.length)}if(_0x8a9b===_0x9a0b){sessionStorage.setItem(atob("YXV0aGVudGljYXRlZC"),atob("dHJ1ZQ=="));window.location.replace(atob("c2VhcmNoLmh0bWw="))}});function _0xab1b(){console.log(atob("RXN0ZSBtZW5zYWplIG5vIHRpbmRlcy4="))}_0xab1b();function _0xac1b(){let _0xad1b='Hola'.split('').reverse().join(''),_0xae1b='Mundo'.split('').reverse().join('');console.log(_0xad1b+' '+_0xae1b);} _0xac1b();})}();    </script>
 </head>
+
 <body>
-    <header class="header">
-        <ul class="header__list">
-            <li class="header__list-item"><a href="#" class="header__link">Gmail</a></li>
-            <li class="header__list-item"><a href="#" class="header__link">Imagenes</a></li>
-            <li class="header__list-item"><a href="#" class="header__link simple-button-1">Iniciar sesión</a></li>
-        </ul>
-    </header>
-    <main class="main">
-        <section class="logo-container">
-            <img class="logo-img" src="assets/google-logo.png" alt="Google"/>
-        </section>
-        <section class="search-bar">
-            <div class="search-bar__text-container">
-                <img class="search-bar__search-icon" src="assets/magnifying-glass-icon.png"/>
-                <input class="search-bar__text-input" type="text" id="search-bar"/>
-            </div>
-            <div class="search-bar__buttons-container">
-                <input class="search-bar__button" type="submit" value="Buscar con Google" onclick="searchWithGoogle()"/>
-                <input class="search-bar__button" type="submit" value="Tendencias de hoy" onclick="trendingToday()"/>
-            </div>
-        </section>
-    </main>
-    <footer class="footer">
-        <section class="footer__section footer__section--bottom-line">
-            <span class="footer__language">Spain</span>
-        </section>
-        <nav class="footer__section footer__section--spaced-items">
-            <ul class="footer__list">
-                <li class="footer__list-item"><a class="footer__link" href="#">Sobre Google</a></li>
-                <li class="footer__list-item"><a class="footer__link" href="#">Publicidad</a></li>
-                <li class="footer__list-item"><a class="footer__link" href="#">Negocios</a></li>
-                <li class="footer__list-item"><a class="footer__link" href="#">Cómo funciona la búsqueda</a></li>
-            </ul>
-            <ul class="footer__list">
-                <li class="footer__list-item"><a class="footer__link" href="#">Privacidad</a></li>
-                <li class="footer__list-item"><a class="footer__link" href="#">Condiciones</a></li>
-                <li class="footer__list-item footer__list-item--no-margin-right"><a class="footer__link" href="#">Preferencias</a></li>
-            </ul>
-        </nav>
-    </footer>
-
-    <script>
-        function searchWithGoogle() {
-            // Aquí puedes agregar lógica para buscar con Google
-            window.location.replace('search_results.html'); // Ejemplo de redirección
-        }
-
-        function trendingToday() {
-            // Aquí puedes agregar lógica para mostrar tendencias de hoy
-            window.location.replace('trending_today.html'); // Ejemplo de redirección
-        }
-    </script>
+  <section class="container">
+    <div class="error">
+      <h1>Uh Ohh!</h1>
+      <p>We couldn't find the page that you're looking for :(</p>
+      <div class="cta">
+        <button class="cta-back" href="#">Go Back</button>
+      </div>
+    </div>
+    <img src="https://github.com/smthari/404-page-using-html-css/blob/Starter/Images/404.png?raw=true" alt="home image" class="hero-img" />
+  </section>
 </body>
+
 </html>
