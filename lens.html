@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #383e42;
             visibility: hidden;
+            position: relative; /* Asegura que los elementos internos se posicionen correctamente */
         }
 
         h1 {
@@ -24,8 +25,8 @@
 
         .back-button {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            bottom: 20px; /* Colocar el botón en la parte inferior */
+            left: 20px; /* Colocar el botón a la izquierda */
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -37,6 +38,7 @@
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 10; /* Asegura que el botón esté en la parte superior */
         }
 
         .back-button:hover {
@@ -116,8 +118,6 @@
     </script>
 </head>
 <body>
-    <a href="search.html" class="back-button">Volver a Search</a>
-    
     <div class="game-container">
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-world-online')">
             <img src="assets/super-mario-world.jpg" alt="Super Mario World Online">
@@ -204,7 +204,7 @@
             <p>Madness Sherrifs</p>
         </div>
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/fifa-road-to-world-cup-98')">
-            <img src="assets/fifa.jpg" alt="Madness Sherrifs">
+            <img src="assets/fifa.jpg" alt="Fifa 98">
             <p>Fifa 98</p>
         </div>
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/pou-online')">
@@ -236,6 +236,8 @@
         <!-- El iframe del juego seleccionado se cargará aquí -->
     </div>
 
+    <a href="search.html" class="back-button">Volver a Search</a>
+    
     <script>
         function loadGame(url) {
             const iframeContainer = document.getElementById('iframe-container');
