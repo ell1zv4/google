@@ -23,8 +23,9 @@
         }
 
         .back-button {
-            display: block;
-            margin: 20px auto;
+            position: absolute;
+            top: 20px;
+            left: 20px;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -34,10 +35,13 @@
             font-size: 1rem;
             text-align: center;
             text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .back-button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
         }
 
         .game-container {
@@ -188,7 +192,7 @@
             <p>Tetris</p>
         </div>
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/call-of-war')">
-            <img src="assets/call-of-war.jpg" alt="Five Nights at Freddy's">
+            <img src="assets/call-of-war.jpg" alt="Call of War">
             <p>Call of War</p>
         </div>
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-kart')">
