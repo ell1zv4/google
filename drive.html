@@ -10,6 +10,28 @@
         body {
             visibility: hidden;
         }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -24,6 +46,8 @@
     </script>
 </head>
 <body>
+    <a href="search.html" class="back-button">Volver a Search</a>
+    
     <script>
         function loadVideo() {
             const videoInput = document.getElementById("video").value; 
