@@ -33,9 +33,23 @@
         async function buscar(event) {
             event.preventDefault();
             const query = document.getElementById('query').value;
-            const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
-            const html = await response.text();
-            document.getElementById('results').innerHTML = html;
+            const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1&no_html=1&skip_disambig=1`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Limpiar resultados anteriores
+
+            // Mostrar los resultados
+            if (data.RelatedTopics.length > 0) {
+                data.RelatedTopics.forEach(topic => {
+                    const resultItem = document.createElement('div');
+                    resultItem.innerHTML = `<h3>${topic.Text}</h3><p>${topic.Result}</p>`;
+                    resultsDiv.appendChild(resultItem);
+                });
+            } else {
+                resultsDiv.innerHTML = 'No se encontraron resultados.';
+            }
         }
     </script>
 </body>
