@@ -17,6 +17,7 @@
             background-color: #383e42;
             font-family: 'Poppins', sans-serif;
             visibility: hidden;
+            position: relative; /* Para posicionar el botón correctamente */
         }
 
         .divs {
@@ -70,6 +71,29 @@
             color: #f4f4f4;
             margin-bottom: 40px;
         }
+
+        .back-button {
+            position: absolute;
+            bottom: 20px; /* Colocar el botón en la parte inferior */
+            left: 20px; /* Colocar el botón a la izquierda */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 10; /* Asegura que el botón esté en la parte superior */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -105,5 +129,7 @@
             });
         });
     </script>
+
+    <a href="search.html" class="back-button">Volver a Search</a>
 </body>
 </html>
