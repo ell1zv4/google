@@ -121,6 +121,17 @@
             transform: translateY(-2px);
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+            } else {
+                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+            }
+        });
+    </script>
 </head>
 <body>
 
