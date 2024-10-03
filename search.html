@@ -26,8 +26,6 @@
             gap: 20px;
             padding: 20px;
             max-width: 1200px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
         }
 
         .divs {
@@ -40,7 +38,6 @@
             height: 180px;
             overflow: hidden;
             transform: translateY(-30px);
-            opacity: 0;
             animation: slideIn 0.8s ease-out forwards;
         }
 
@@ -57,23 +54,13 @@
             transition: transform 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
         @keyframes slideIn {
             0% {
-                transform: translateY(30px);
-                opacity: 0;
+                transform: translateY(-30px);
+                
             }
             100% {
                 transform: translateY(0);
-                opacity: 1;
             }
         }
 
