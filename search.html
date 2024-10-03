@@ -52,15 +52,15 @@
         }
 
         .divs img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            width: 100%;  /* Cambiado a 100% para mostrar la imagen completa */
+            height: 100%; /* Cambiado a 100% para mostrar la imagen completa */
+            object-fit: contain; /* Asegura que la imagen se ajuste sin recortarse */
             transition: transform 0.3s ease;
             display: block;
         }
 
         .divs:hover img {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Escala la imagen un poco al hacer hover */
         }
 
         @keyframes fadeIn {
@@ -106,10 +106,6 @@
                 
                 document.querySelectorAll('.divs').forEach((div, index) => {
                     div.style.animationDelay = `${index * 0.1}s`;
-                    div.addEventListener('click', () => {
-                        const link = div.dataset.link;
-                        window.location.replace(link);
-                    });
                 });
             }
         });
