@@ -12,13 +12,12 @@
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background-color: #383e42;
+            background-color: #1e1f21;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             visibility: hidden;
-            overflow: hidden; /* Evitar el scroll */
         }
 
         .carteles {
@@ -27,46 +26,49 @@
             gap: 20px;
             padding: 20px;
             max-width: 1200px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
         .divs {
-            background-color: #4b545a;
-            border-radius: 12px;
-            border: none; /* Asegurar que no haya borde */
-            box-shadow: none; /* Sin sombra inicial */
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
+            background-color: #292b2e;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200px;
-            transition: transform 0.3s ease, background-color 0.3s ease; /* Transiciones para hover */
+            height: 180px;
+            transition: transform 0.4s ease, background-color 0.3s ease;
+            overflow: hidden;
         }
 
-        /* Efecto hover */
         .divs:hover {
-            background-color: #626a70;  
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.6), 0 0 40px rgba(0, 150, 255, 0.4); /* Sombra azul de neón */
-            transform: scale(1.05);  
-            outline: none; /* Sin borde visible */
+            background-color: #3a3d41;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 150, 255, 0.2);
         }
 
-        /* Imágenes */
         .divs img {
-            width: 80%;
+            width: 70%;
             height: auto;
-            display: block;
-            border-radius: 12px;
-            transition: transform 0.3s ease;  
+            transition: transform 0.3s ease;
         }
 
-        /* Crecimiento de imagen en hover */
         .divs:hover img {
-            transform: scale(1.1);  
+            transform: scale(1.1);
         }
 
-        /* Responsividad: ajuste de columnas según el tamaño de la pantalla */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media(max-width: 768px) {
             .carteles {
                 grid-template-columns: 1fr 1fr;
@@ -84,15 +86,14 @@
             const isAuthenticated = sessionStorage.getItem('authenticated');
             
             if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com'; 
+                window.location.href = 'https://www.google.com';
             } else {
-                document.body.style.visibility = 'visible'; 
-
-                // Asignar eventos de clic a cada div solo después de que el DOM esté cargado
+                document.body.style.visibility = 'visible';
+                
                 document.querySelectorAll('.divs').forEach(div => {
                     div.addEventListener('click', () => {
                         const link = div.dataset.link;
-                        window.location.replace(link); 
+                        window.location.replace(link);
                     });
                 });
             }
