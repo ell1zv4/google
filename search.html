@@ -38,25 +38,15 @@
             justify-content: center;
             align-items: center;
             height: 180px;
-            transition: background-color 0.3s ease;
             overflow: hidden;
             animation: slideDown 0.5s ease forwards;
         }
 
-        .divs:hover {
-            background-color: #3a3d41;
-            box-shadow: 0 10px 20px rgba(0, 150, 255, 0.2);
-        }
-
         .divs img {
-            width: 100%;
+            width: auto;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: transform 0.3s ease;
-        }
-
-        .divs:hover img {
-            transform: scale(1.1);
         }
 
         @keyframes fadeIn {
