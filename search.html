@@ -37,7 +37,7 @@
             height: 180px;
             overflow: hidden;
             animation: slideIn 0.8s ease-out forwards;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .divs:hover {
@@ -54,11 +54,11 @@
 
         @keyframes slideIn {
             0% {
-                transform: translateY(-50px) scale(0.9);
+                transform: translateY(-50px);
                 opacity: 0;
             }
             100% {
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
