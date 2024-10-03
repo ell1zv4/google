@@ -37,12 +37,12 @@
             height: 180px;
             overflow: hidden;
             animation: slideIn 0.8s ease-out forwards;
-            transform: translateY(0);
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .divs:hover {
             background-color: #3a3d41;
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.05);
             box-shadow: 0 10px 20px rgba(0, 150, 255, 0.2);
         }
 
@@ -54,11 +54,12 @@
 
         @keyframes slideIn {
             0% {
-                transform: translateY(-30px);
-                
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
             }
             100% {
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
+                opacity: 1;
             }
         }
     </style>
