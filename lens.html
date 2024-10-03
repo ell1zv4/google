@@ -24,8 +24,8 @@
         }
 
         .back-button {
-            position: absolute;
-            top: 10px;
+            position: fixed;
+            bottom: 10px;
             left: 10px;
             padding: 10px 20px;
             background-color: #ff5252;
@@ -34,7 +34,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
-            z-index: 20;
+            z-index: 10;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease, transform 0.3s ease;
@@ -54,7 +54,7 @@
         }
 
         .game-item {
-            background-color: #f8f9fa;
+            background-color: #3a3a3a;
             width: 200px;
             border-radius: 10px;
             overflow: hidden;
@@ -79,7 +79,7 @@
             padding: 10px;
             font-size: 1rem;
             font-weight: bold;
-            color: #333;
+            color: #f0f0f0;
         }
 
         .iframe-overlay {
@@ -103,7 +103,7 @@
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         iframe {
@@ -115,14 +115,16 @@
         .close-button {
             position: absolute;
             top: 10px;
-            left: 10px;
-            padding: 10px 20px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
             background-color: #ff5252;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            text-align: center;
             cursor: pointer;
-            font-size: 1rem;
             z-index: 100;
             transition: background-color 0.3s ease;
         }
@@ -176,7 +178,7 @@
             <img src="assets/uno.svg" alt="UNO">
             <p>UNO</p>
         </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/1v1-lol')">
+                <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/1v1-lol')">
             <img src="assets/1v1lol.avif" alt="1v1 LOL">
             <p>1v1 LOL</p>
         </div>
@@ -360,7 +362,7 @@
 
     <div id="iframe-overlay" class="iframe-overlay">
         <div class="iframe-container" id="iframe-container"></div>
-        <button class="close-button" onclick="closeIframe()">Cerrar</button>
+        <button class="close-button" onclick="closeIframe()">X</button>
     </div>
 
     <a href="search.html" class="back-button">Volver</a>
