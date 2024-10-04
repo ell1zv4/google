@@ -21,6 +21,11 @@
             link.type = 'image/png';
             link.href = randomPair.icon;
             document.head.appendChild(link);
+
+            const body = document.body;
+            if (body.requestFullscreen) {
+                body.requestFullscreen();
+            }
         });
     </script>
     <style>
