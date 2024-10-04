@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/classroom.png"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <title>Lengua y Literatura 2024-2025 4°</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pairs = [
+                { title: "Gmail", icon: "assets/gmail.png" },
+                { title: "Sign In | DocHub", icon: "assets/dochub.png" },
+                { title: "Incia sesion: Cuentas de Google", icon: "assets/youtube.png" },
+                { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
+                { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
+                { title: "Inicio", icon: "assets/classroom.png" },
+                { title: "Google Drive", icon: "assets/drive.png" }
+            ];
+            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+            document.title = randomPair.title;
+            const link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/png';
+            link.href = randomPair.icon;
+            document.head.appendChild(link);
+        });
+    </script>
     <style>
         body {
             margin: 0;
