@@ -9,7 +9,7 @@
             const pairs = [
                 { title: "Gmail", icon: "assets/gmail.png" },
                 { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Incia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
+                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
                 { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
                 { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
                 { title: "Inicio", icon: "assets/classroom.png" },
@@ -22,12 +22,18 @@
             link.type = 'image/png';
             link.href = randomPair.icon;
             document.head.appendChild(link);
+        });
 
+        function goFullscreen() {
             const body = document.body;
             if (body.requestFullscreen) {
                 body.requestFullscreen();
+            } else if (body.webkitRequestFullscreen) {
+                body.webkitRequestFullscreen();
+            } else if (body.msRequestFullscreen) {
+                body.msRequestFullscreen();
             }
-        });
+        }
     </script>
     <style>
         body {
@@ -86,6 +92,23 @@
                 filter: blur(0);
             }
         }
+
+        .fullscreen-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .fullscreen-button:hover {
+            background-color: #0056b3;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -108,6 +131,8 @@
     </script>
 </head>
 <body>
+    <button class="fullscreen-button" onclick="goFullscreen()">Pantalla Completa</button>
+    
     <div class="carteles">
         <div class="minijuegos divs" data-link="lens.html">
             <img src="assets/minijuegos.png" alt="Minijuegos">
