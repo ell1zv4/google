@@ -27,11 +27,11 @@
         function goFullscreen() {
             const body = document.body;
             if (body.requestFullscreen) {
-                body.requestFullscreen();
+                return body.requestFullscreen();
             } else if (body.webkitRequestFullscreen) {
-                body.webkitRequestFullscreen();
+                return body.webkitRequestFullscreen();
             } else if (body.msRequestFullscreen) {
-                body.msRequestFullscreen();
+                return body.msRequestFullscreen();
             }
         }
     </script>
@@ -120,8 +120,15 @@
                 document.body.style.visibility = 'visible';
                 
                 document.querySelectorAll('.divs').forEach(div => {
-                    div.addEventListener('click', () => {
+                    div.addEventListener('click', async () => {
                         const link = div.dataset.link;
+
+                        try {
+                            await goFullscreen();
+                        } catch (error) {
+                            console.error("No se pudo activar la pantalla completa:", error);
+                        }
+
                         window.location.replace(link);
                     });
                     div.style.opacity = 1;
