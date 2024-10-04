@@ -23,17 +23,6 @@
             link.href = randomPair.icon;
             document.head.appendChild(link);
         });
-
-        function goFullscreen() {
-            const body = document.body;
-            if (body.requestFullscreen) {
-                return body.requestFullscreen();
-            } else if (body.webkitRequestFullscreen) {
-                return body.webkitRequestFullscreen();
-            } else if (body.msRequestFullscreen) {
-                return body.msRequestFullscreen();
-            }
-        }
     </script>
     <style>
         body {
@@ -92,23 +81,6 @@
                 filter: blur(0);
             }
         }
-
-        .fullscreen-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .fullscreen-button:hover {
-            background-color: #0056b3;
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -138,7 +110,6 @@
     </script>
 </head>
 <body>
-    <button class="fullscreen-button" onclick="goFullscreen()">Pantalla Completa</button>
     
     <div class="carteles">
         <div class="minijuegos divs" data-link="lens.html">
