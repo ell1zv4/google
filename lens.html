@@ -148,7 +148,7 @@
             document.getElementById('game-container').style.display = 'flex';
         }
 
-        function loadIframe(url) {
+        function loadGame(url) {
             const iframeOverlay = document.getElementById('iframe-overlay');
             const iframeContainer = document.getElementById('iframe-container');
             iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
@@ -165,7 +165,7 @@
 <body>
     <div id="games-buttons">
         <h1>Selecciona una Opción</h1>
-        <button class="button" onclick="loadIframe('https://minijuegos.com/');">Buscar Juegos</button>
+        <button class="button" onclick="loadGame('https://minijuegos.com/');">Buscar Juegos</button>
         <button class="button" onclick="showGames();">Mejores Juegos</button>
     </div>
 
