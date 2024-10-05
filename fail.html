@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JA</title>
+    <div id="youtube-videos"></div>
+
+        <script>
+        const API_KEY = 'TU_API_KEY';
+        const API_URL = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=5&regionCode=US&key=${API_KEY}`;
+
+        fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            const videoContainer = document.getElementById('youtube-videos');
+            data.items.forEach(video => {
+            const videoId = video.id;
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.width = '560';
+            iframe.height = '315';
+            videoContainer.appendChild(iframe);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+        </script>
+
+</head>
+<body>
+    
+</body>
+</html>
