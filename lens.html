@@ -394,6 +394,34 @@
         <div class="iframe-container" id="iframe-container"></div>
         <button class="close-button" onclick="closeIframe()">X</button>
     </div>
+        <button id="search-button" class="search-button">🔍</button>
+    
+    <style>
+        .search-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #e04747;
+        }
+    </style>
+    
+    <script>
+        document.getElementById('search-button').addEventListener('click', () => {
+            loadGame('https://www.minijuegos.com');
+        });
+    </script>
     <a href="search.html" class="back-button">Volver</a>
 </body>
 </html>
