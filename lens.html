@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
             const pairs = [
                 { title: "Gmail", icon: "assets/gmail.png" },
                 { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Incia sesion: Cuentas de Google", icon: "assets/google-favicon.png" },
+                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
                 { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
                 { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
                 { title: "Inicio", icon: "assets/classroom.png" },
@@ -21,11 +22,6 @@
             link.type = 'image/png';
             link.href = randomPair.icon;
             document.head.appendChild(link);
-
-            const body = document.body;
-            if (body.requestFullscreen) {
-                body.requestFullscreen();
-            }
         });
     </script>
     <style>
@@ -34,61 +30,59 @@
             margin: 0;
             padding: 0;
             background-color: #1e1e1e;
-            visibility: hidden;
-            position: relative;
-        }
-        h1 {
-            text-align: center;
-            padding: 20px;
             color: #f0f0f0;
-            font-size: 2.5rem;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        .back-button {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px 20px;
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5rem;
+        }
+
+        .button {
+            padding: 20px 40px;
+            margin: 20px;
             background-color: #ff5252;
             color: white;
             border: none;
             border-radius: 5px;
+            font-size: 1.5rem;
             cursor: pointer;
-            font-size: 1rem;
-            z-index: 10;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease;
         }
-        .back-button:hover {
+
+        .button:hover {
             background-color: #e04747;
-            transform: translateY(-2px);
         }
+
         .game-container {
-            display: flex;
+            display: none;
             flex-wrap: wrap;
             justify-content: center;
             padding: 20px;
             gap: 20px;
         }
+
         .game-item {
             background-color: #3a3a3a;
             width: 200px;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             cursor: pointer;
         }
-        .game-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 255, 255, 0.4);
-        }
+
         .game-item img {
             width: 100%;
             height: 150px;
             object-fit: cover;
         }
+
         .game-item p {
             text-align: center;
             padding: 10px;
@@ -96,6 +90,7 @@
             font-weight: bold;
             color: #f0f0f0;
         }
+
         .iframe-overlay {
             position: fixed;
             top: -100%;
@@ -109,20 +104,23 @@
             align-items: center;
             transition: top 0.5s ease;
         }
+
         .iframe-container {
             position: relative;
             width: 80%;
-            height: 500px;
+            height: 80%;
             background-color: transparent;
             border-radius: 0;
             overflow: hidden;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
+
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+
         .close-button {
             position: absolute;
             top: 10px;
@@ -139,27 +137,18 @@
             z-index: 100;
             transition: background-color 0.3s ease;
         }
+
         .close-button:hover {
             background-color: #e04747;
         }
-        @media (max-width: 768px) {
-            .iframe-container {
-                width: 100%;
-                height: 400px;
-            }
-        }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('authenticated');
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com';
-            } else {
-                document.body.style.visibility = 'visible';
-            }
-        });
+        function showGames() {
+            document.getElementById('games-buttons').style.display = 'none';
+            document.getElementById('game-container').style.display = 'flex';
+        }
 
-        function loadGame(url) {
+        function loadIframe(url) {
             const iframeOverlay = document.getElementById('iframe-overlay');
             const iframeContainer = document.getElementById('iframe-container');
             iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
@@ -172,8 +161,15 @@
         }
     </script>
 </head>
+
 <body>
-    <div class="game-container">
+    <div id="games-buttons">
+        <h1>Selecciona una Opción</h1>
+        <button class="button" onclick="loadIframe('https://1001juegos.com/');">Buscar Juegos</button>
+        <button class="button" onclick="showGames();">Mejores Juegos</button>
+    </div>
+
+    <div id="game-container" class="game-container">
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-world-online')">
             <img src="assets/super-mario-world.jpg" alt="Super Mario World Online">
             <p>Super Mario World Online</p>
@@ -389,13 +385,13 @@
         <div class="game-item" onclick="loadGame('https://hole-io.com/')">
             <img src="assets/hole.jpg" alt="Hole.io">
             <p>Hole.io</p>
+        </div>
     </div>
+
     <div id="iframe-overlay" class="iframe-overlay">
         <div class="iframe-container" id="iframe-container"></div>
         <button class="close-button" onclick="closeIframe()">X</button>
     </div>
-    <a href="search.html" class="back-button">Volver</a>
 </body>
+
 </html>
-
-
