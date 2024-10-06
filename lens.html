@@ -161,7 +161,7 @@
         function loadGame(url) {
             const iframeOverlay = document.getElementById('iframe-overlay');
             const iframeContainer = document.getElementById('iframe-container');
-            iframeContainer.innerHTML = <iframe src="${url}" allowfullscreen></iframe>;
+            iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
             iframeOverlay.style.top = '0';
         }
 
