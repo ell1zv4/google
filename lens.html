@@ -393,7 +393,7 @@
         <div class="iframe-container" id="iframe-container"></div>
         <button class="close-button" onclick="closeIframe()">X</button>
     </div>
-    <button id="search-button" class="search-button">🔍</button>
+    <button id="search-button" class="search-button" onclick="loadGame('https://www.minijuegos.com')">🔍</button>
     <style>
         .search-button {
             position: fixed;
@@ -414,12 +414,6 @@
             background-color: #e04747;
         }
     </style>
-    
-    <script>
-        document.getElementById('search-button').addEventListener('click', () => {
-            loadGame('https://www.minijuegos.com');
-        });
-    </script>
     <a href="search.html" class="back-button">Volver</a>
 </body>
 </html>
