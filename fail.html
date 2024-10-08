@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com';
+            } else {
+                document.body.style.visibility = 'visible';
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
             const pairs = [
                 { title: "Gmail", icon: "assets/gmail.png" },
                 { title: "Sign In | DocHub", icon: "assets/dochub.png" },
