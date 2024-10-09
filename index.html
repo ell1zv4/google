@@ -12,8 +12,12 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
   <script>
-    const password = process.env.PASSWORD;
-    console.log(password);
+    fetch('/.netlify/functions/get-secret-message')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.message);
+      })
+      .catch(error => console.error('Error:', error));
   </script>
 </head>
 
