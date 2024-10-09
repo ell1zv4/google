@@ -22,16 +22,23 @@
   </script>
   <script>
     let input = '';
+
     function validarPassword() {
-        if (password && input === password) {
+        if (input === password) {
             sessionStorage.setItem("accesoPermitido", "true");
             window.location.href = 'search.html';
+        } else {
+            alert("Contraseña incorrecta. Inténtalo de nuevo.");
+            input = '';
         }
     }
+
     document.addEventListener('keypress', function(event) {
         input += event.key;
-        validarPassword();
-        if (input.length > 15) {
+        if (event.key === "Enter") {
+            validarPassword();
+        }
+        if (input.length > 20) {
             input = ''; 
         }
     });
