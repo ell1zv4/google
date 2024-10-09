@@ -9,7 +9,7 @@
   <title>Google</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  
   <script>
     let password;
 
@@ -19,19 +19,23 @@
         password = data.message;
       })
       .catch(error => console.error('Error:', error));
+
+    setInterval(() => {
+        const devToolsOpen = /./;
+        devToolsOpen.toString = function () {
+            if (!sessionStorage.getItem('devToolsDetected')) {
+                sessionStorage.setItem('devToolsDetected', 'true');
+                window.location.href = 'index.html';
+            }
+        };
+        console.log(devToolsOpen);
+    }, 1000);
   </script>
-  <script>
-    const devToolsOpen = /./;
-    devToolsOpen.toString = function () {
-        window.location.href='index.html';
-    };
-    console.log(devToolsOpen);
-  </script>
+  
   <script>
     let input = '';
 
     function validarPassword() {
-        console.log(password);
         if (input === password) {
             sessionStorage.setItem("authenticated", "true");
             window.location.href = 'search.html';
