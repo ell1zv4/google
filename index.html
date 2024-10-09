@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,28 +12,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
   <script>
     let password;
+
     fetch('/.netlify/functions/get-secret-message')
       .then(response => response.json())
       .then(data => {
-        const password = data.message
+        password = data.message;
       })
       .catch(error => console.error('Error:', error));
   </script>
   <script>
-        let input = '';
-        function validarPassword() {
-            if (input === password) {
-                sessionStorage.setItem("accesoPermitido", "true");
-                window.location.href = 'search.html';
-            }
+    let input = '';
+    function validarPassword() {
+        if (password && input === password) {
+            sessionStorage.setItem("accesoPermitido", "true");
+            window.location.href = 'search.html';
         }
-        document.addEventListener('keypress', function(event) {
-            input += event.key;
-            validarPassword();
-            if (input.length > 15) {
-                input = ''; 
-            }
-        });
+    }
+    document.addEventListener('keypress', function(event) {
+        input += event.key;
+        validarPassword();
+        if (input.length > 15) {
+            input = ''; 
+        }
+    });
   </script>
 </head>
 
@@ -50,5 +50,4 @@
     <img src="https://github.com/smthari/404-page-using-html-css/blob/Starter/Images/404.png?raw=true" alt="home image" class="hero-img" />
   </section>
 </body>
-
 </html>
