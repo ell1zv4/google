@@ -21,6 +21,13 @@
       .catch(error => console.error('Error:', error));
   </script>
   <script>
+    const devToolsOpen = /./;
+    devToolsOpen.toString = function () {
+        window.location.href='index.html';
+    };
+    console.log(devToolsOpen);
+  </script>
+  <script>
     let input = '';
 
     function validarPassword() {
