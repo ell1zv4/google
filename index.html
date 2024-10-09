@@ -9,7 +9,7 @@
   <title>Google</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  
+
   <script>
     let password;
 
@@ -21,15 +21,32 @@
       .catch(error => console.error('Error:', error));
 
     setInterval(() => {
-        const devToolsOpen = /./;
-        devToolsOpen.toString = function () {
-            if (!sessionStorage.getItem('devToolsDetected')) {
-                sessionStorage.setItem('devToolsDetected', 'true');
-                window.location.href = 'index.html';
-            }
-        };
-        console.log(devToolsOpen);
+      const devToolsOpen = /./;
+      devToolsOpen.toString = function () {
+        if (!sessionStorage.getItem('devToolsDetected')) {
+          sessionStorage.setItem('devToolsDetected', 'true');
+          alert('DevTools detectados, redirigiendo...');
+          window.location.href = 'index.html';
+        }
+      };
+      console.log(devToolsOpen);
     }, 1000);
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'F12' || 
+          (event.ctrlKey && event.shiftKey && event.key === 'I') || 
+          (event.ctrlKey && event.shiftKey && event.key === 'C') || 
+          (event.ctrlKey && event.shiftKey && event.key === 'J') || 
+          (event.ctrlKey && event.key === 'U')) {
+        event.preventDefault();
+        alert('Acceso a DevTools bloqueado');
+      }
+    });
+
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+      alert('El clic derecho está deshabilitado');
+    });
   </script>
   
   <script>
@@ -56,12 +73,12 @@
   <section class="container">
     <div class="error">
       <h1>Uh Ohh!</h1>
-      <p>We couldn't find the page that you're looking for :(</p>
+      <p>No pudimos encontrar la página que estás buscando :(</p>
       <div class="cta">
-        <button class="cta-back" href="https://google.com">Go Back</button>
+        <button class="cta-back" href="https://google.com">Volver</button>
       </div>
     </div>
-    <img src="https://github.com/smthari/404-page-using-html-css/blob/Starter/Images/404.png?raw=true" alt="home image" class="hero-img" />
+    <img src="https://github.com/smthari/404-page-using-html-css/blob/Starter/Images/404.png?raw=true" alt="Imagen de error" class="hero-img" />
   </section>
 </body>
 </html>
