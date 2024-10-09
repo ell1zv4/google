@@ -24,20 +24,16 @@
     let input = '';
 
     function validarPassword() {
+        console.log(password);
         if (input === password) {
             sessionStorage.setItem("accesoPermitido", "true");
             window.location.href = 'search.html';
-        } else {
-            alert("Contraseña incorrecta. Inténtalo de nuevo.");
-            input = '';
         }
     }
 
     document.addEventListener('keypress', function(event) {
         input += event.key;
-        if (event.key === "Enter") {
-            validarPassword();
-        }
+        validarPassword();
         if (input.length > 20) {
             input = ''; 
         }
