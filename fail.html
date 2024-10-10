@@ -30,12 +30,12 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('authenticated');
+            const isAuthenticated = sessionStorage.getItem('truth');
             
             if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com'; // Redirigir a Google si no está autenticado
+                window.location.href = 'https://www.google.com'; 
             } else {
-                document.body.style.visibility = 'visible'; // Mostrar el contenido si está autenticado
+                document.body.style.visibility = 'visible'; 
             }
         });
     </script>
