@@ -12,7 +12,7 @@
 <script>
   let input = '';
   function validarPassword(input) {
-    fetch('/.netlify/functions/validate-password', {
+    fetch('/.netlify/functions/get-secret-message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
