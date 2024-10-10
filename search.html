@@ -42,6 +42,7 @@
     
         document.addEventListener('visibilitychange', handleVisibilityChange);
         unlockBtn.addEventListener('click', hideBlockScreen);
+        window.addEventListener('blur', handleWindowBlur);
     </script>
     
     <style>
