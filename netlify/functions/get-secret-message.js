@@ -1,8 +1,17 @@
-exports.handler = async function(event, context) {
+exports.handler = async (event) => {
   const password = process.env.PASSWORD;
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: password }),
-  };
+  const { input } = JSON.parse(event.body);
+
+  if (input === password) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ valid: true })
+    };
+  } else {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ valid: false })
+    };
+  }
 };
