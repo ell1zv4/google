@@ -27,6 +27,14 @@
                 body.requestFullscreen();
             }
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('truth');
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com';
+            } else {
+                document.body.style.visibility = 'visible';
+            }
+        });
     </script>
     <style>
         body {
