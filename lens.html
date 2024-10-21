@@ -189,7 +189,43 @@
     </script>
 </head>
 <body>
-    <div class="game-container">
+        <div class="game-container">
+        <div class="game-item" id="slots" onclick="loadGame('https://www.247slots.org'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/slots.png" alt="Slots">
+            <p>Slots</p>
+        </div>
+        <div class="game-item" id="chess" onclick="loadGame('https://www.247chess.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/chess.png" alt="Chess">
+            <p>Chess</p>
+        </div>
+        <div class="game-item" id="pool" onclick="loadGame('https://www.247chess.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/billar.png" alt="Pool">
+            <p>Pool</p>
+        </div>
+        <div class="game-item" id="black" onclick="loadGame('https://www.247blackjack.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/black.png" alt="black">
+            <p>BlackJack</p>
+        </div>
+        <div class="game-item" id="ruleta" onclick="loadGame('https://www.247roulette.org'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/ruleta.png" alt="ruleta">
+            <p>Ruleta</p>
+        </div>
+        <div class="game-item" id="pinball" onclick="loadGame('https://www.247pinball.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/pinball.jpg" alt="pinball">
+            <p>Pinball</p>
+        </div>
+        <div class="game-item" id="buscaminas" onclick="loadGame('https://www.247minesweeper.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/buscaminas.png" alt="pinball">
+            <p>Buscaminas</p>
+        </div>
+        <div class="game-item" id="wordle" onclick="loadGame('https://www.247minesweeper.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
+            <img src="assets/wordle.png" alt="wordle">
+            <p>Wordle</p>
+        </div>
+        <div class="game-item" onclick="loadGame('https://hole-io.com/')">
+                <img src="assets/hole.jpg" alt="Hole.io">
+                <p>Hole.io</p>
+        </div>
         <div class="game-item" id="minecraft" onclick="loadGame('https://eaglercraft.com/mc/1.8.8/'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
             <img src="assets/minecraft.jpg" alt="Minecraft">
             <p>Minecraft</p>
@@ -402,29 +438,9 @@
             <img src="assets/ship.avif" alt="Ships 3D">
             <p>Ships 3D</p>
         </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/chess-free/index.html')">
-            <img src="assets/chess.png" alt="Chess">
-            <p>Chess</p>
-        </div>
         <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/time-shooter-2/index.html')">
             <img src="assets/time.avif" alt="Time Shooter 2">
             <p>Time Shooter 2</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://hole-io.com/')">
-            <img src="assets/hole.jpg" alt="Hole.io">
-            <p>Hole.io</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/grand-roulette')">
-            <img src="assets/ruleta.jpg" alt="Ruleta Casino">
-            <p>Ruleta Casino</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/ace-blackjack')">
-            <img src="assets/black.png" alt="BlackJack">
-            <p>BlackJack</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.simplepoker.io/game/home')">
-            <img src="assets/poker.png" alt="BlackJack">
-            <p>Poker</p>
         </div>
     </div>
     <div id="iframe-overlay" class="iframe-overlay">
