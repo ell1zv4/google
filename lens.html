@@ -169,10 +169,10 @@
             const iframeOverlay = document.getElementById('iframe-overlay');
             iframeOverlay.style.top = '-100%';
         }
-        function toggleFullScreen(id) {
-            const iframe = document.getElementById(id);
+        function toggleFullScreen() {
+            const iframeOverlay = document.getElementById('iframe-overlay');
             if (!document.fullscreenElement) {
-                iframe.requestFullscreen().catch(err => {
+                iframeOverlay.requestFullscreen().catch(err => {
                     alert(`Error al intentar activar pantalla completa: ${err.message}`);
                 });
             } else {
