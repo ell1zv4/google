@@ -168,24 +168,23 @@
             const iframeContainer = document.getElementById('iframe-container');
             iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
             iframeOverlay.style.top = '0';
-            toggleFullScreen();  
+            toggleFullScreen(iframeContainer); 
+        }
+        
+        function toggleFullScreen(element) {
+            if (!document.fullscreenElement) {
+                element.requestFullscreen().catch(err => {
+                    alert(`Error al intentar activar pantalla completa: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
         }
 
         function closeIframe() {
             const iframeOverlay = document.getElementById('iframe-overlay');
             iframeOverlay.style.top = '-100%';
             document.exitFullscreen();  
-        }
-
-        function toggleFullScreen() {
-            const iframeOverlay = document.getElementById('iframe-overlay');
-            if (!document.fullscreenElement) {
-                iframeOverlay.requestFullscreen().catch(err => {
-                    alert(`Error al intentar activar pantalla completa: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
         }
     </script>
 </head>
