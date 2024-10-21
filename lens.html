@@ -169,11 +169,24 @@
             const iframeOverlay = document.getElementById('iframe-overlay');
             iframeOverlay.style.top = '-100%';
         }
+        function toggleFullScreen() {
+            const iframe = document.getElementById("kickFrame");
+            if (!document.fullscreenElement) {
+                iframe.requestFullscreen().catch(err => {
+                    alert(`Error al intentar activar pantalla completa: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
     </script>
 </head>
 <body>
+    <button class='fullscreen-button' onclick="toggleFullScreen()">
+            <img src="assets/fullscreen.png" alt="Pantalla Completa">
+    </button>
     <div class="game-container">
-        <div class="game-item" onclick="loadGame('https://eaglercraft.com/mc/1.8.8/')">
+        <div class="game-item" id="minecraft" onclick="loadGame('https://eaglercraft.com/mc/1.8.8/'); toggleFullScreen(this.getAttribute('data-iframe-id')">
             <img src="assets/minecraft.jpg" alt="Minecraft">
             <p>Minecraft</p>
         </div>
