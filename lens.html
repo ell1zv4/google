@@ -169,8 +169,8 @@
             const iframeOverlay = document.getElementById('iframe-overlay');
             iframeOverlay.style.top = '-100%';
         }
-        function toggleFullScreen() {
-            const iframe = document.getElementById("kickFrame");
+        function toggleFullScreen(id) {
+            const iframe = document.getElementById(id);
             if (!document.fullscreenElement) {
                 iframe.requestFullscreen().catch(err => {
                     alert(`Error al intentar activar pantalla completa: ${err.message}`);
@@ -182,13 +182,14 @@
     </script>
 </head>
 <body>
-    <button class='fullscreen-button' onclick="toggleFullScreen()">
-            <img src="assets/fullscreen.png" alt="Pantalla Completa">
-    </button>
     <div class="game-container">
         <div class="game-item" id="minecraft" onclick="loadGame('https://eaglercraft.com/mc/1.8.8/'); toggleFullScreen(this.getAttribute('data-iframe-id')">
             <img src="assets/minecraft.jpg" alt="Minecraft">
             <p>Minecraft</p>
+        </div>
+        <div class="game-item" id="road" onclick="loadGame('https://slowroads.io'); toggleFullScreen(this.getAttribute('data-iframe-id')">
+            <img src="assets/road.jpg" alt="Road">
+            <p>Road Infinite</p>
         </div>
         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-world-online')">
             <img src="assets/super-mario-world.jpg" alt="Super Mario World Online">
