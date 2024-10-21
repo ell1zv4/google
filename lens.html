@@ -168,6 +168,7 @@
             const iframeContainer = document.getElementById('iframe-container');
             iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
             iframeOverlay.style.top = '0';
+            toggleFullScreen('game-iframe');
         }
 
         function closeIframe() {
