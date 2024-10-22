@@ -91,7 +91,7 @@
     </svg>
   </div>
 
-  <iframe id="proxyFrame"></iframe>
+  <iframe id="proxyFrame" src="https://www.proxysite.com/"></iframe>
 
   <script>
     const searchBox = document.getElementById('searchQuery');
@@ -101,9 +101,29 @@
       if (e.key === 'Enter') {
         let query = searchBox.value.trim();
         if (query) {
-          // Mostrar el iframe y cargar la búsqueda de Bing dentro de Proxysite
-          iframe.style.display = 'block';  // Mostrar el iframe al buscar
-          iframe.src = `https://eu10.proxysite.com/process.php?action=update&d=https://www.bing.com/search?q=${encodeURIComponent(query)}juan&b=1`;
+          // Mostrar el iframe
+          iframe.style.display = 'block';  
+
+          // Esperar a que el iframe se cargue
+          iframe.onload = function() {
+            // Obtener el contenido del iframe
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            
+            // Llenar el campo de búsqueda en proxysite.com
+            const searchField = iframeDocument.querySelector('input[name="d"]');
+            if (searchField) {
+              searchField.value = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+
+              // Simular el evento Enter
+              const event = new KeyboardEvent('keydown', {
+                bubbles: true,
+                cancelable: true,
+                key: 'Enter',
+                code: 'Enter',
+              });
+              searchField.dispatchEvent(event);
+            }
+          };
         }
       }
     });
