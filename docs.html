@@ -1,54 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const pairs = [
-                { title: "Gmail", icon: "assets/gmail.png" },
-                { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Incia sesion: Cuentas de Google", icon: "assets/google-favicon.png" },
-                { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
-                { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
-                { title: "Inicio", icon: "assets/classroom.png" },
-                { title: "Google Drive", icon: "assets/drive.png" }
-            ];
-            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
-            document.title = randomPair.title;
-            const link = document.createElement('link');
-            link.rel = 'icon';
-            link.type = 'image/png';
-            link.href = randomPair.icon;
-            document.head.appendChild(link);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Google Search</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #181818; 
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-            const body = document.body;
-            if (body.requestFullscreen) {
-                body.requestFullscreen();
-            }
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('truth');
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com';
-            } else {
-                document.body.style.visibility = 'visible';
-            }
-        });
-    </script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-        iframe {
-            border: none;
-            height: 100vh;
-            width: 100vw;
-        }
-    </style>
+    .container {
+      text-align: center;
+    }
+
+    .logo {
+      width: 270px;
+      margin-bottom: 40px;
+    }
+
+    .search-box {
+      width: 500px;
+      max-width: 90%;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 25px;
+      border: 1px solid #333;
+      outline: none;
+      background-color: #303030;
+      color: #fff;
+    }
+
+    .search-box:focus {
+      border: 1px solid #555;
+    }
+
+    .search-container {
+      display: inline-block;
+      width: 100%;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #444;
+      color: white;
+    }
+
+    .search-button:hover {
+      background-color: #555;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-    <iframe src="https://www.bing.com" id="myIframe"></iframe>
+
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" class="logo">
+    <div class="search-container">
+      <input type="text" class="search-box" placeholder="Buscar en Google">
+      <button class="search-button" onclick="search()">Buscar</button>
+    </div>
+  </div>
+
+  <footer>
+    Google simulado - Tema oscuro
+  </footer>
+
+  <script>
+    function search() {
+      let query = document.querySelector('.search-box').value;
+      if (query) {
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      }
+    }
+  </script>
+  
 </body>
 </html>
