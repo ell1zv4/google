@@ -100,24 +100,15 @@
       if (e.key === 'Enter') {
         let query = searchBox.value.trim();
         if (query) {
-          // Mostrar el iframe
           iframe.style.display = 'block';
-
-          // Esperar a que el iframe se cargue completamente
           iframe.onload = function() {
             const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-
-            // Obtener el div con la clase "row" y buscar los elementos dentro
             const rowDiv = iframeDocument.querySelector('.row');
             const searchField = rowDiv.querySelector('input[name="d"]');
-            const submitButton = rowDiv.querySelector('input[type="submit"]');
 
             if (searchField && submitButton) {
-              // Establecer el valor de búsqueda en el campo
               searchField.value = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
 
-              // Simular el clic en el botón de envío
-              submitButton.click();
             }
           };
         }
