@@ -102,26 +102,22 @@
         let query = searchBox.value.trim();
         if (query) {
           // Mostrar el iframe
-          iframe.style.display = 'block';  
+          iframe.style.display = 'block';
 
-          // Esperar a que el iframe se cargue
+          // Esperar a que el iframe se cargue completamente
           iframe.onload = function() {
-            // Obtener el contenido del iframe
             const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-            
-            // Llenar el campo de búsqueda en proxysite.com
-            const searchField = iframeDocument.querySelector('input[name="d"]');
-            if (searchField) {
-              searchField.value = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
 
-              // Simular el evento Enter
-              const event = new KeyboardEvent('keydown', {
-                bubbles: true,
-                cancelable: true,
-                key: 'Enter',
-                code: 'Enter',
-              });
-              searchField.dispatchEvent(event);
+            // Buscar el campo de texto y el botón dentro del div con la clase "row"
+            const rowDiv = iframeDocument.querySelector('.row');
+            const searchField = rowDiv.querySelector('input[name="d"]');
+            const submitButton = rowDiv.querySelector('input[type="submit"]');
+
+            if (searchField && submitButton) {
+              searchField.value = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+              
+              // Simular el evento de envío del formulario
+              submitButton.click();
             }
           };
         }
