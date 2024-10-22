@@ -49,7 +49,6 @@
       padding: 12px;
       font-size: 20px;
       outline: none;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       transition: color 0.3s ease;
     }
 
@@ -108,15 +107,16 @@
           iframe.onload = function() {
             const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
 
-            // Buscar el campo de texto y el botón dentro del div con la clase "row"
+            // Obtener el div con la clase "row" y buscar los elementos dentro
             const rowDiv = iframeDocument.querySelector('.row');
             const searchField = rowDiv.querySelector('input[name="d"]');
             const submitButton = rowDiv.querySelector('input[type="submit"]');
 
             if (searchField && submitButton) {
+              // Establecer el valor de búsqueda en el campo
               searchField.value = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-              
-              // Simular el evento de envío del formulario
+
+              // Simular el clic en el botón de envío
               submitButton.click();
             }
           };
