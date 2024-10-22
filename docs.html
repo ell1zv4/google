@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #1c1c1c;
+      background-color: #1b1b1b;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,15 +22,15 @@
       align-items: center;
       background-color: #333;
       border-radius: 50px;
-      padding: 15px;
-      width: 500px;
+      padding: 15px 20px;
+      width: 600px;
       max-width: 90%;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
       transition: box-shadow 0.3s ease;
     }
 
     .search-container:hover {
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
     }
 
     .icon, .icon-mic {
@@ -38,6 +38,7 @@
       height: 28px;
       fill: #bbb;
       margin: 0 15px;
+      transition: fill 0.3s ease;
     }
 
     .search-box {
@@ -46,13 +47,23 @@
       background-color: transparent;
       color: #fff;
       padding: 12px;
-      font-size: 18px;
+      font-size: 20px;
       outline: none;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: color 0.3s ease;
     }
 
     .search-box::placeholder {
       color: #777;
+      transition: color 0.3s ease;
+    }
+
+    .search-box:focus::placeholder {
+      color: #444;
+    }
+
+    .icon:hover, .icon-mic:hover {
+      fill: #fff;
     }
 
     iframe {
@@ -61,7 +72,8 @@
       border: none;
       margin-top: 30px;
       border-radius: 12px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+      display: none; /* Inicialmente oculto */
     }
   </style>
 </head>
@@ -87,10 +99,11 @@
 
     searchBox.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
-        let query = searchBox.value;
+        let query = searchBox.value.trim();
         if (query) {
-          // Redirigir a proxysite.com usando Bing dentro de un iframe
-          iframe.src = `https://eu2.proxysite.com/process.php?d=bing.com/search?q=${encodeURIComponent(query)}`;
+          // Mostrar el iframe y cargar la búsqueda de Bing dentro de Proxysite
+          iframe.style.display = 'block';  // Mostrar el iframe al buscar
+          iframe.src = `https://eu2.proxysite.com/includes/process.php?action=update&d=www.bing.com/search?q=${encodeURIComponent(query)}`;
         }
       }
     });
