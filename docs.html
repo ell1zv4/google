@@ -8,8 +8,8 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #181818;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1c1c1c;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,51 +20,48 @@
     .search-container {
       display: flex;
       align-items: center;
-      background-color: #2a2a2a;
-      border: 1px solid #555;
+      background-color: #333;
       border-radius: 50px;
-      padding: 10px;
-      width: 600px;
+      padding: 15px;
+      width: 500px;
       max-width: 90%;
-    }
-
-    .search-box {
-      width: 100%;
-      border: none;
-      background-color: transparent;
-      color: #fff;
-      padding: 10px;
-      font-size: 18px;
-      outline: none;
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-      fill: #aaa;
-      margin: 0 10px;
-    }
-
-    .icon-mic {
-      width: 24px;
-      height: 24px;
-      fill: #aaa;
-      margin-left: auto;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.3s ease;
     }
 
     .search-container:hover {
-      border-color: #888;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
     }
 
-    .search-container:focus-within {
-      border-color: #ccc;
+    .icon, .icon-mic {
+      width: 28px;
+      height: 28px;
+      fill: #bbb;
+      margin: 0 15px;
+    }
+
+    .search-box {
+      flex-grow: 1;
+      border: none;
+      background-color: transparent;
+      color: #fff;
+      padding: 12px;
+      font-size: 18px;
+      outline: none;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .search-box::placeholder {
+      color: #777;
     }
 
     iframe {
-      width: 100%;
+      width: 90%;
       height: 80vh;
       border: none;
-      margin-top: 20px;
+      margin-top: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
     }
   </style>
 </head>
@@ -75,7 +72,7 @@
       <path d="M10 2a8 8 0 106.32 12.9l4.33 4.33a1 1 0 001.41-1.41l-4.33-4.33A8 8 0 0010 2zm0 2a6 6 0 11-6 6 6 6 0 016-6z"></path>
     </svg>
 
-    <input type="text" class="search-box" id="searchQuery" placeholder="Buscar">
+    <input type="text" class="search-box" id="searchQuery" placeholder="Search on Bing...">
 
     <svg class="icon-mic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M12 15a3 3 0 003-3V6a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 0014 0zM11 19v2h2v-2a9 9 0 01-8-9h2a7 7 0 007 7z"></path>
