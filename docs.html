@@ -117,7 +117,7 @@
   <div class="modal" id="modal">
     <div class="modal-content">
       <p id="modalMessage"></p>
-      <span class="copy-link" id="copyLink"></span>
+      <span class="copy-link" id="copyLink">Enlace</span>
       <button class="close-button" id="closeButton">Cerrar</button>
     </div>
   </div>
@@ -135,8 +135,7 @@
         let query = searchBox.value.trim();
         if (query) {
           const link = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-          modalMessage.textContent = 'Pon en el iframe el siguiente enlace:';
-          copyLink.textContent = link; // Mostrar el enlace en el modal
+          modalMessage.textContent = 'Haz clic en "Enlace" para copiar el enlace:';
           copyLink.onclick = function() {
             navigator.clipboard.writeText(link).then(() => {
               alert('Enlace copiado al portapapeles!');
