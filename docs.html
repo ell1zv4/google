@@ -97,6 +97,13 @@
       cursor: pointer;
       margin-top: 20px;
     }
+
+    .copy-link {
+      color: #ffdd57;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -110,6 +117,7 @@
   <div class="modal" id="modal">
     <div class="modal-content">
       <p id="modalMessage"></p>
+      <span class="copy-link" id="copyLink"></span>
       <button class="close-button" id="closeButton">Cerrar</button>
     </div>
   </div>
@@ -118,6 +126,7 @@
     const searchBox = document.getElementById('searchQuery');
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modalMessage');
+    const copyLink = document.getElementById('copyLink');
     const closeButton = document.getElementById('closeButton');
     const iframe = document.getElementById('proxyFrame');
 
@@ -126,14 +135,15 @@
         let query = searchBox.value.trim();
         if (query) {
           const link = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-          modalMessage.textContent = `Pon en el iframe el siguiente enlace:\n\n${link}`;
+          modalMessage.textContent = 'Pon en el iframe el siguiente enlace:';
+          copyLink.textContent = link; // Mostrar el enlace en el modal
+          copyLink.onclick = function() {
+            navigator.clipboard.writeText(link).then(() => {
+              alert('Enlace copiado al portapapeles!');
+            });
+          };
           modal.style.display = 'flex';
           iframe.style.display = 'block'; // Mostrar el iframe
-          navigator.clipboard.writeText(link).then(() => {
-            console.log('El enlace se ha copiado al portapapeles.');
-          }).catch(err => {
-            console.error('Error al copiar el texto: ', err);
-          });
         }
       }
     });
