@@ -61,7 +61,7 @@
       margin-top: 30px;
       border-radius: 12px;
       box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
-      display: none;
+      display: none; /* Inicialmente oculto */
     }
 
     .modal {
@@ -119,6 +119,7 @@
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modalMessage');
     const closeButton = document.getElementById('closeButton');
+    const iframe = document.getElementById('proxyFrame');
 
     searchBox.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
@@ -127,6 +128,7 @@
           const link = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
           modalMessage.textContent = `Pon en el iframe el siguiente enlace:\n\n${link}`;
           modal.style.display = 'flex';
+          iframe.style.display = 'block'; // Mostrar el iframe
           navigator.clipboard.writeText(link).then(() => {
             console.log('El enlace se ha copiado al portapapeles.');
           }).catch(err => {
