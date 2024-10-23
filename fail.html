@@ -44,7 +44,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            overflow: hidden; /* Evita el desplazamiento */
+            overflow: hidden;
         }
 
         .modal {
@@ -98,20 +98,23 @@
 
         .back-btn {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
+            top: 50%; /* Centrado verticalmente */
+            right: 20px; /* Pegado a la derecha */
+            transform: translateY(-50%); /* Ajusta para centrar completamente */
             background-color: #6c757d;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
+            border-radius: 25px; /* Bordes redondeados más grandes */
+            padding: 15px 30px; /* Aumento del padding */
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s; /* Transición suave */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del botón */
         }
 
         .back-btn:hover {
             background-color: #5a6268;
+            transform: translateY(-50%) scale(1.05); /* Efecto de aumento al pasar el ratón */
         }
 
         @keyframes fadeIn {
@@ -127,11 +130,11 @@
 
         iframe {
             width: 100%;
-            height: 100%; /* Ajustar el iframe para que ocupe toda la altura */
-            border: none; /* Sin bordes */
-            position: absolute; /* Posición absoluta para ocupar el espacio completo */
-            top: 0; /* Arriba */
-            left: 0; /* Izquierda */
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
     </style>
 </head>
