@@ -3,23 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/gmail.png"/>
-    <title>Gmail</title>
+    <title>Iframe de HDTodayTV</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('truth');
-            
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com';
-            } else {
-                document.body.style.visibility = 'visible'; 
+        function blockExternalRedirects(event) {
+            const allowedDomain = 'hdtodaytv.fun';
+            const targetUrl = event.target.src;
+
+            if (!targetUrl.includes(allowedDomain)) {
+                event.preventDefault();
+                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
             }
-        });
+        }
+
+        window.onload = function() {
+            const iframe = document.getElementById('contentFrame');
+
+            iframe.onload = function() {
+                const script = iframe.contentWindow.document.createElement('script');
+                script.innerHTML = `
+                    window.onbeforeunload = function() {
+                        window.parent.blockExternalRedirects({ target: { src: document.location.href } });
+                    };
+                `;
+                iframe.contentWindow.document.body.appendChild(script);
+            };
+        };
     </script>
 </head>
 <body>
-
-   <iframe src="https://znr.cuevana.pro" width=100% height="1000px" allowfullscreen></iframe>
-
+    <iframe id="contentFrame" src="https://ww3.hdtodaytv.fun" allowfullscreen></iframe>
 </body>
 </html>
