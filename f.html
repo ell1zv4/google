@@ -27,22 +27,39 @@
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
-                    window.open = function(url, target) {
+                    // Bloquear la apertura de nuevas ventanas
+                    window.open = function() {
                         alert('Las nuevas ventanas están bloqueadas.');
-                        return null; // Previene la apertura de la ventana
+                        return null;
                     };
 
-                    const originalAlert = window.alert;
-                    window.alert = function(message) {
-                        originalAlert(message);
-                    };
+                    // Bloquear redirecciones
+                    const allowedDomain = 'hdtodaytv.fun';
 
-                    // Bloquear el evento de clic en el documento
+                    function isAllowedDomain(url) {
+                        return url.includes(allowedDomain);
+                    }
+
+                    // Bloquear cambios en window.location y document.location
+                    Object.defineProperty(window, 'location', {
+                        set: function(url) {
+                            if (!isAllowedDomain(url)) {
+                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                            } else {
+                                window.location.href = url; // Permitir la redirección si es del dominio permitido
+                            }
+                        }
+                    });
+
+                    // Bloquear eventos de clic
                     document.addEventListener('click', function(event) {
-                        const target = event.target;
-                        if (target && target.tagName === 'A' && target.target === '_blank') {
-                            event.preventDefault();
-                            alert('Las nuevas ventanas están bloqueadas.');
+                        const target = event.target.closest('a');
+                        if (target) {
+                            const targetUrl = target.href || target.getAttribute('href');
+                            if (!isAllowedDomain(targetUrl)) {
+                                event.preventDefault();
+                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                            }
                         }
                     });
                 `;
