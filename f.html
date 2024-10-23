@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloquear Nuevas Ventanas</title>
+    <title>Iframe de HDTodayTV</title>
     <style>
         body {
             margin: 0;
@@ -14,31 +14,86 @@
             height: 100vh;
             background-color: #f8f9fa;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
     <script>
-        // Sobrescribir window.open para bloquear aperturas de nuevas ventanas
-        window.open = function() {
-            alert('Apertura de nuevas ventanas está bloqueada.');
-            return null;
-        };
+        // Crear una función para bloquear redirecciones
+        function blockRedirections() {
+            const iframe = document.getElementById('contentFrame');
+            const allowedDomain = 'hdtodaytv.fun';
 
-        // Bloquear otros métodos de redirección
-        const originalLocationAssign = window.location.assign;
-        window.location.assign = function(url) {
-            alert('Redirección bloqueada: no se permite cambiar la ubicación.');
-        };
+            // Bloquear la apertura de nuevas ventanas
+            window.open = function() {
+                alert('Apertura de nuevas ventanas está bloqueada.');
+                return null;
+            };
 
-        const originalLocationReplace = window.location.replace;
-        window.location.replace = function(url) {
-            alert('Redirección bloqueada: no se permite cambiar la ubicación.');
+            // Interceptar redirecciones en window.location
+            const originalLocationAssign = iframe.contentWindow.location.assign;
+            iframe.contentWindow.location.assign = function(url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalLocationAssign.call(iframe.contentWindow.location, url);
+                }
+            };
+
+            const originalLocationReplace = iframe.contentWindow.location.replace;
+            iframe.contentWindow.location.replace = function(url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalLocationReplace.call(iframe.contentWindow.location, url);
+                }
+            };
+
+            // Bloquear el uso de history.pushState y history.replaceState
+            const originalPushState = iframe.contentWindow.history.pushState;
+            iframe.contentWindow.history.pushState = function(state, title, url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalPushState.call(iframe.contentWindow.history, state, title, url);
+                }
+            };
+
+            const originalReplaceState = iframe.contentWindow.history.replaceState;
+            iframe.contentWindow.history.replaceState = function(state, title, url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalReplaceState.call(iframe.contentWindow.history, state, title, url);
+                }
+            };
+
+            // Bloquear eventos de clic en enlaces
+            iframe.contentWindow.document.addEventListener('click', function(event) {
+                const target = event.target.closest('a');
+                if (target) {
+                    const targetUrl = target.href;
+                    if (!targetUrl.includes(allowedDomain)) {
+                        event.preventDefault();
+                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            const iframe = document.getElementById('contentFrame');
+
+            // Bloquear redirecciones una vez que el iframe se haya cargado
+            iframe.onload = function() {
+                blockRedirections();
+            };
         };
     </script>
 </head>
 <body>
-    <button onclick="window.open('https://www.example.com')">Abrir Ventana</button>
+    <iframe id="contentFrame" src="https://ww3.hdtodaytv.fun" allowfullscreen></iframe>
 </body>
 </html>
