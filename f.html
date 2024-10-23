@@ -27,13 +27,8 @@
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
-                    // Bloquear la apertura de nuevas ventanas
-                    window.open = function() {
-                        alert('Las nuevas ventanas están bloqueadas.');
-                        return null;
-                    };
+                    window.open = null; // Bloquear el método window.open
 
-                    // Bloquear redirecciones
                     const allowedDomain = 'hdtodaytv.fun';
 
                     function isAllowedDomain(url) {
