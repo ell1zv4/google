@@ -27,35 +27,121 @@
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
-                    // Bloquear el método window.open
+                    // Bloquear la apertura de nuevas ventanas
                     window.open = null;
 
-                    // Bloquear cualquier intento de redirección
-                    window.addEventListener('beforeunload', function(event) {
-                        event.preventDefault();
-                        event.returnValue = ''; // Algunos navegadores requieren esto para prevenir redirecciones
-                    });
+                    // Bloquear el acceso a otros métodos que puedan redirigir
+                    window.location = window.location.href; // Bloquear cambios en window.location
 
-                    // Bloquear redirecciones mediante otros métodos
+                    // Dominio permitido
+                    const allowedDomain = 'hdtodaytv.fun';
+
+                    function isAllowedDomain(url) {
+                        return url.includes(allowedDomain);
+                    }
+
+                    // Interceptar redirecciones en window.location
                     const originalLocationAssign = window.location.assign;
                     window.location.assign = function(url) {
-                        if (!url.includes('hdtodaytv.fun')) {
+                        if (!isAllowedDomain(url)) {
                             alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
                         } else {
                             originalLocationAssign.call(window.location, url);
                         }
                     };
 
-                    // Interceptar clicks en enlaces
+                    const originalLocationReplace = window.location.replace;
+                    window.location.replace = function(url) {
+                        if (!isAllowedDomain(url)) {
+                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                        } else {
+                            originalLocationReplace.call(window.location, url);
+                        }
+                    };
+
+                    // Bloquear cualquier intento de cambiar window.location.href
+                    Object.defineProperty(window.location, 'href', {
+                        set: function(url) {
+                            if (!isAllowedDomain(url)) {
+                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                            } else {
+                                window.location.href = url;
+                            }
+                        }
+                    });
+
+                    // Bloquear eventos de clic en enlaces
                     document.addEventListener('click', function(event) {
                         const target = event.target.closest('a');
                         if (target) {
                             const targetUrl = target.href || target.getAttribute('href');
-                            if (!targetUrl.includes('hdtodaytv.fun')) {
+                            if (!isAllowedDomain(targetUrl)) {
                                 event.preventDefault();
                                 alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
                             }
                         }
+                    });
+
+                    // Bloquear el uso de history.pushState y history.replaceState
+                    const originalPushState = history.pushState;
+                    history.pushState = function(state, title, url) {
+                        if (!isAllowedDomain(url)) {
+                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                        } else {
+                            originalPushState.call(history, state, title, url);
+                        }
+                    };
+
+                    const originalReplaceState = history.replaceState;
+                    history.replaceState = function(state, title, url) {
+                        if (!isAllowedDomain(url)) {
+                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                        } else {
+                            originalReplaceState.call(history, state, title, url);
+                        }
+                    };
+
+                    // Bloquear el uso de setTimeout y setInterval para redirecciones
+                    const originalSetTimeout = window.setTimeout;
+                    window.setTimeout = function(callback, delay) {
+                        return originalSetTimeout(function() {
+                            if (typeof callback === 'function') {
+                                const originalCallback = callback;
+                                callback = function() {
+                                    const url = arguments[0];
+                                    if (!isAllowedDomain(url)) {
+                                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                                    } else {
+                                        originalCallback.apply(this, arguments);
+                                    }
+                                };
+                            }
+                            return originalSetTimeout(callback, delay);
+                        }, delay);
+                    };
+
+                    const originalSetInterval = window.setInterval;
+                    window.setInterval = function(callback, delay) {
+                        return originalSetInterval(function() {
+                            if (typeof callback === 'function') {
+                                const originalCallback = callback;
+                                callback = function() {
+                                    const url = arguments[0];
+                                    if (!isAllowedDomain(url)) {
+                                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                                    } else {
+                                        originalCallback.apply(this, arguments);
+                                    }
+                                };
+                            }
+                            return originalSetInterval(callback, delay);
+                        }, delay);
+                    };
+
+                    // Bloquear eventos de contexto (clic derecho)
+                    document.addEventListener('contextmenu', function(event) {
+                        event.preventDefault();
+                        alert('El clic derecho está deshabilitado.');
                     });
                 `;
                 iframe.contentWindow.document.body.appendChild(script);
