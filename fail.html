@@ -33,6 +33,10 @@
         });
     </script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
         .modal {
           display: none;
           position: fixed;
@@ -47,33 +51,33 @@
         }
         
         .modal-content {
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 10px;
+          background-color: #f8f9fa; /* Color más claro para el fondo */
+          padding: 30px; /* Aumento del padding */
+          border-radius: 15px; /* Bordes más redondeados */
           width: 400px;
           max-width: 80%;
           text-align: center;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra más suave */
           animation: fadeIn 0.5s ease;
         }
         
         .modal-content h2 {
-          margin-bottom: 15px;
-          font-size: 24px;
+          margin-bottom: 20px;
+          font-size: 26px; /* Aumento del tamaño de fuente */
           color: #333;
         }
         
         .modal-content p {
-          font-size: 16px;
+          font-size: 18px; /* Aumento del tamaño de fuente */
           color: #555;
-          margin-bottom: 20px;
+          margin-bottom: 30px; /* Espacio adicional */
         }
         
         .close-btn {
           position: absolute;
-          top: 10px;
+          top: 15px;
           right: 20px;
-          font-size: 20px;
+          font-size: 24px;
           cursor: pointer;
           color: #aaa;
         }
@@ -81,7 +85,22 @@
         .close-btn:hover {
           color: #000;
         }
-        
+
+        .back-btn {
+          background-color: #6c757d; /* Color gris */
+          color: white;
+          border: none;
+          border-radius: 5px; /* Bordes redondeados */
+          padding: 10px 20px; /* Padding */
+          font-size: 16px; /* Tamaño de fuente */
+          cursor: pointer;
+          transition: background-color 0.3s; /* Transición suave */
+        }
+
+        .back-btn:hover {
+          background-color: #5a6268; /* Color gris más oscuro al pasar el ratón */
+        }
+
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -101,6 +120,7 @@
             <h2>¡Bienvenido a Random Chat!</h2>
             <p>En este chat, la gente suele presentarse con una "m" (de masculino) o "f" (de femenino) seguida de su edad. Por ejemplo, <strong>"m 25"</strong> o <strong>"f 20"</strong>.</p>
             <p>¡Lo más divertido que puedes hacer es hacerte pasar por una <strong>"f 20"</strong> y sorprender a todos!</p>
+            <button class="back-btn" onclick="window.location.href='search.html'">Volver</button> <!-- Botón volver -->
         </div>
     </div>
 
