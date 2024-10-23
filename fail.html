@@ -87,6 +87,9 @@
         }
 
         .back-btn {
+          position: fixed; /* Posicionamiento fijo */
+          bottom: 20px; /* Distancia del fondo */
+          right: 20px; /* Distancia de la derecha */
           background-color: #6c757d; /* Color gris */
           color: white;
           border: none;
@@ -120,11 +123,12 @@
             <h2>¡Bienvenido a Random Chat!</h2>
             <p>En este chat, la gente suele presentarse con una "m" (de masculino) o "f" (de femenino) seguida de su edad. Por ejemplo, <strong>"m 25"</strong> o <strong>"f 20"</strong>.</p>
             <p>¡Lo más divertido que puedes hacer es hacerte pasar por una <strong>"f 20"</strong> y sorprender a todos!</p>
-            <button class="back-btn" onclick="window.location.href='search.html'">Volver</button> <!-- Botón volver -->
         </div>
     </div>
 
     <iframe width="100%" height="1000px" src="https://omegleapp.me/chat"></iframe>
+
+    <button class="back-btn" onclick="window.location.href='search.html'">Volver</button> <!-- Botón volver fuera del modal -->
 
     <script>
         window.onload = function() {
