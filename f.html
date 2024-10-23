@@ -28,10 +28,10 @@
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
                     // Bloquear la apertura de nuevas ventanas
-                    window.open = null;
-
-                    // Bloquear el acceso a otros métodos que puedan redirigir
-                    window.location = window.location.href; // Bloquear cambios en window.location
+                    window.open = function() {
+                        alert('Apertura de nuevas ventanas está bloqueada.');
+                        return null;
+                    };
 
                     // Dominio permitido
                     const allowedDomain = 'hdtodaytv.fun';
@@ -143,6 +143,18 @@
                         event.preventDefault();
                         alert('El clic derecho está deshabilitado.');
                     });
+
+                    // Interceptar cualquier llamada a document.write que podría afectar el contenido
+                    const originalDocumentWrite = document.write;
+                    document.write = function() {
+                        alert('Acceso denegado: el uso de document.write está deshabilitado.');
+                    };
+
+                    // Bloquear cualquier otro método que intente redirigir
+                    const originalAlert = window.alert;
+                    window.alert = function(message) {
+                        originalAlert.call(window, message);
+                    };
                 `;
                 iframe.contentWindow.document.body.appendChild(script);
             };
