@@ -21,142 +21,74 @@
         }
     </style>
     <script>
+        // Crear una función para bloquear redirecciones
+        function blockRedirections() {
+            const iframe = document.getElementById('contentFrame');
+            const allowedDomain = 'hdtodaytv.fun';
+
+            // Bloquear la apertura de nuevas ventanas
+            window.open = function() {
+                alert('Apertura de nuevas ventanas está bloqueada.');
+                return null;
+            };
+
+            // Interceptar redirecciones en window.location
+            const originalLocationAssign = iframe.contentWindow.location.assign;
+            iframe.contentWindow.location.assign = function(url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalLocationAssign.call(iframe.contentWindow.location, url);
+                }
+            };
+
+            const originalLocationReplace = iframe.contentWindow.location.replace;
+            iframe.contentWindow.location.replace = function(url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalLocationReplace.call(iframe.contentWindow.location, url);
+                }
+            };
+
+            // Bloquear el uso de history.pushState y history.replaceState
+            const originalPushState = iframe.contentWindow.history.pushState;
+            iframe.contentWindow.history.pushState = function(state, title, url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalPushState.call(iframe.contentWindow.history, state, title, url);
+                }
+            };
+
+            const originalReplaceState = iframe.contentWindow.history.replaceState;
+            iframe.contentWindow.history.replaceState = function(state, title, url) {
+                if (!url.includes(allowedDomain)) {
+                    alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                } else {
+                    originalReplaceState.call(iframe.contentWindow.history, state, title, url);
+                }
+            };
+
+            // Bloquear eventos de clic en enlaces
+            iframe.contentWindow.document.addEventListener('click', function(event) {
+                const target = event.target.closest('a');
+                if (target) {
+                    const targetUrl = target.href;
+                    if (!targetUrl.includes(allowedDomain)) {
+                        event.preventDefault();
+                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                    }
+                }
+            });
+        }
+
         window.onload = function() {
             const iframe = document.getElementById('contentFrame');
 
+            // Bloquear redirecciones una vez que el iframe se haya cargado
             iframe.onload = function() {
-                const script = iframe.contentWindow.document.createElement('script');
-                script.innerHTML = `
-                    // Bloquear la apertura de nuevas ventanas
-                    window.open = function() {
-                        alert('Apertura de nuevas ventanas está bloqueada.');
-                        return null;
-                    };
-
-                    // Dominio permitido
-                    const allowedDomain = 'hdtodaytv.fun';
-
-                    function isAllowedDomain(url) {
-                        return url.includes(allowedDomain);
-                    }
-
-                    // Interceptar redirecciones en window.location
-                    const originalLocationAssign = window.location.assign;
-                    window.location.assign = function(url) {
-                        if (!isAllowedDomain(url)) {
-                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                        } else {
-                            originalLocationAssign.call(window.location, url);
-                        }
-                    };
-
-                    const originalLocationReplace = window.location.replace;
-                    window.location.replace = function(url) {
-                        if (!isAllowedDomain(url)) {
-                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                        } else {
-                            originalLocationReplace.call(window.location, url);
-                        }
-                    };
-
-                    // Bloquear cualquier intento de cambiar window.location.href
-                    Object.defineProperty(window.location, 'href', {
-                        set: function(url) {
-                            if (!isAllowedDomain(url)) {
-                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                            } else {
-                                window.location.href = url;
-                            }
-                        }
-                    });
-
-                    // Bloquear eventos de clic en enlaces
-                    document.addEventListener('click', function(event) {
-                        const target = event.target.closest('a');
-                        if (target) {
-                            const targetUrl = target.href || target.getAttribute('href');
-                            if (!isAllowedDomain(targetUrl)) {
-                                event.preventDefault();
-                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                            }
-                        }
-                    });
-
-                    // Bloquear el uso de history.pushState y history.replaceState
-                    const originalPushState = history.pushState;
-                    history.pushState = function(state, title, url) {
-                        if (!isAllowedDomain(url)) {
-                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                        } else {
-                            originalPushState.call(history, state, title, url);
-                        }
-                    };
-
-                    const originalReplaceState = history.replaceState;
-                    history.replaceState = function(state, title, url) {
-                        if (!isAllowedDomain(url)) {
-                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                        } else {
-                            originalReplaceState.call(history, state, title, url);
-                        }
-                    };
-
-                    // Bloquear el uso de setTimeout y setInterval para redirecciones
-                    const originalSetTimeout = window.setTimeout;
-                    window.setTimeout = function(callback, delay) {
-                        return originalSetTimeout(function() {
-                            if (typeof callback === 'function') {
-                                const originalCallback = callback;
-                                callback = function() {
-                                    const url = arguments[0];
-                                    if (!isAllowedDomain(url)) {
-                                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                                    } else {
-                                        originalCallback.apply(this, arguments);
-                                    }
-                                };
-                            }
-                            return originalSetTimeout(callback, delay);
-                        }, delay);
-                    };
-
-                    const originalSetInterval = window.setInterval;
-                    window.setInterval = function(callback, delay) {
-                        return originalSetInterval(function() {
-                            if (typeof callback === 'function') {
-                                const originalCallback = callback;
-                                callback = function() {
-                                    const url = arguments[0];
-                                    if (!isAllowedDomain(url)) {
-                                        alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                                    } else {
-                                        originalCallback.apply(this, arguments);
-                                    }
-                                };
-                            }
-                            return originalSetInterval(callback, delay);
-                        }, delay);
-                    };
-
-                    // Bloquear eventos de contexto (clic derecho)
-                    document.addEventListener('contextmenu', function(event) {
-                        event.preventDefault();
-                        alert('El clic derecho está deshabilitado.');
-                    });
-
-                    // Interceptar cualquier llamada a document.write que podría afectar el contenido
-                    const originalDocumentWrite = document.write;
-                    document.write = function() {
-                        alert('Acceso denegado: el uso de document.write está deshabilitado.');
-                    };
-
-                    // Bloquear cualquier otro método que intente redirigir
-                    const originalAlert = window.alert;
-                    window.alert = function(message) {
-                        originalAlert.call(window, message);
-                    };
-                `;
-                iframe.contentWindow.document.body.appendChild(script);
+                blockRedirections();
             };
         };
     </script>
