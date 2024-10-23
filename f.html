@@ -27,9 +27,20 @@
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
+                    window.open = function(url, target) {
+                        alert('Las nuevas ventanas están bloqueadas.');
+                        return null; // Previene la apertura de la ventana
+                    };
+
+                    const originalAlert = window.alert;
+                    window.alert = function(message) {
+                        originalAlert(message);
+                    };
+
+                    // Bloquear el evento de clic en el documento
                     document.addEventListener('click', function(event) {
-                        const target = event.target.closest('a');
-                        if (target && target.target === '_blank') {
+                        const target = event.target;
+                        if (target && target.tagName === 'A' && target.target === '_blank') {
                             event.preventDefault();
                             alert('Las nuevas ventanas están bloqueadas.');
                         }
