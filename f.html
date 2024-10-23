@@ -21,25 +21,19 @@
         }
     </style>
     <script>
-        function blockExternalRedirects(event) {
-            const allowedDomain = 'hdtodaytv.fun';
-            const targetUrl = event.target.src;
-
-            if (!targetUrl.includes(allowedDomain)) {
-                event.preventDefault();
-                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-            }
-        }
-
         window.onload = function() {
             const iframe = document.getElementById('contentFrame');
 
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
-                    window.onbeforeunload = function() {
-                        window.parent.blockExternalRedirects({ target: { src: document.location.href } });
-                    };
+                    document.addEventListener('click', function(event) {
+                        const target = event.target.closest('a');
+                        if (target && target.target === '_blank') {
+                            event.preventDefault();
+                            alert('Las nuevas ventanas están bloqueadas.');
+                        }
+                    });
                 `;
                 iframe.contentWindow.document.body.appendChild(script);
             };
