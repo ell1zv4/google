@@ -19,23 +19,18 @@
         }
 
         .iframe-container {
-            position: relative;
+            position: absolute; /* Cambiado a absolute */
+            top: 0; /* Ocupa toda la parte superior */
+            left: 0; /* Ocupa toda la parte izquierda */
             width: 100%;
-            height: 80%; 
-            overflow: auto; 
+            height: 100%; /* Ocupa toda la altura */
+            overflow: hidden; /* Sin barra de desplazamiento */
         }
 
         iframe {
             width: 100%;
             height: 100%; 
             border: none; 
-        }
-
-        .new-iframe {
-            margin-top: 20px;
-            height: 400px; 
-            width: 100%; 
-            border: 2px solid #ccc;
         }
 
         .back-button {
@@ -60,23 +55,6 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-
-        a.next-button {
-            padding: 10px 20px;
-            background-color: #28a745; 
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 20px; 
-        }
-
-        a.next-button:hover {
-            background-color: #218838; 
-        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -92,10 +70,9 @@
 </head>
 <body>
     <div class="iframe-container">
-        <iframe id="rojaIframe" src="https://rojadirectvonline.pl" title="RojaDirecta" sandbox="allow-same-origin allow-scripts" scrolling="yes"></iframe>
+        <iframe id="rojaIframe" src="https://kooora.live-koora.live" title="Kooora" sandbox="allow-same-origin allow-scripts" scrolling="yes"></iframe>
     </div>
     
-    <a href="googlehlep.html" class="next-button">Next</a>
     <a href="search.html" class="back-button">Volver</a>
 </body>
 </html>
