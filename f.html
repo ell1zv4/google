@@ -27,31 +27,31 @@
             iframe.onload = function() {
                 const script = iframe.contentWindow.document.createElement('script');
                 script.innerHTML = `
-                    window.open = null; // Bloquear el método window.open
+                    // Bloquear el método window.open
+                    window.open = null;
 
-                    const allowedDomain = 'hdtodaytv.fun';
-
-                    function isAllowedDomain(url) {
-                        return url.includes(allowedDomain);
-                    }
-
-                    // Bloquear cambios en window.location y document.location
-                    Object.defineProperty(window, 'location', {
-                        set: function(url) {
-                            if (!isAllowedDomain(url)) {
-                                alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
-                            } else {
-                                window.location.href = url; // Permitir la redirección si es del dominio permitido
-                            }
-                        }
+                    // Bloquear cualquier intento de redirección
+                    window.addEventListener('beforeunload', function(event) {
+                        event.preventDefault();
+                        event.returnValue = ''; // Algunos navegadores requieren esto para prevenir redirecciones
                     });
 
-                    // Bloquear eventos de clic
+                    // Bloquear redirecciones mediante otros métodos
+                    const originalLocationAssign = window.location.assign;
+                    window.location.assign = function(url) {
+                        if (!url.includes('hdtodaytv.fun')) {
+                            alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
+                        } else {
+                            originalLocationAssign.call(window.location, url);
+                        }
+                    };
+
+                    // Interceptar clicks en enlaces
                     document.addEventListener('click', function(event) {
                         const target = event.target.closest('a');
                         if (target) {
                             const targetUrl = target.href || target.getAttribute('href');
-                            if (!isAllowedDomain(targetUrl)) {
+                            if (!targetUrl.includes('hdtodaytv.fun')) {
                                 event.preventDefault();
                                 alert('Redirección bloqueada: solo se permiten enlaces dentro del dominio permitido.');
                             }
