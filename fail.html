@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Chat</title>
+
+    <link rel="stylesheet" href="styles.css">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const pairs = [
                 { title: "Gmail", icon: "assets/gmail.png" },
                 { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Incia sesion: Cuentas de Google", icon: "assets/google-favicon.png" },
+                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
                 { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
                 { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
                 { title: "Inicio", icon: "assets/classroom.png" },
@@ -21,17 +24,10 @@
             link.type = 'image/png';
             link.href = randomPair.icon;
             document.head.appendChild(link);
-
-            const body = document.body;
-            if (body.requestFullscreen) {
-                body.requestFullscreen();
-            }
         });
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', () => {
             const isAuthenticated = sessionStorage.getItem('truth');
-            
             if (isAuthenticated !== 'true') {
                 window.location.href = 'https://www.google.com'; 
             } else {
@@ -39,8 +35,97 @@
             }
         });
     </script>
+    <style>
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .modal-content {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          width: 400px;
+          max-width: 80%;
+          text-align: center;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+          animation: fadeIn 0.5s ease;
+        }
+        
+        .modal-content h2 {
+          margin-bottom: 15px;
+          font-size: 24px;
+          color: #333;
+        }
+        
+        .modal-content p {
+          font-size: 16px;
+          color: #555;
+          margin-bottom: 20px;
+        }
+        
+        .close-btn {
+          position: absolute;
+          top: 10px;
+          right: 20px;
+          font-size: 20px;
+          cursor: pointer;
+          color: #aaa;
+        }
+        
+        .close-btn:hover {
+          color: #000;
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+    </style>
 </head>
-<body>
+<body style="visibility: hidden;">
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Welcome to Random Chat!</h2>
+            <p>In this chat, people usually introduce themselves with an "m" (for male) or "f" (for female) followed by their age. For example, <strong>"m 25"</strong> or <strong>"f 20"</strong>.</p>
+            <p>The most fun thing you can do is pretend to be an <strong>"f 20"</strong> and surprise everyone!</p>
+        </div>
+    </div>
+
     <iframe width="100%" height="1000px" src="https://omegleapp.me/chat"></iframe>
+
+    <script>
+        window.onload = function() {
+            const modal = document.getElementById("infoModal");
+            const closeBtn = document.querySelector(".close-btn");
+
+            modal.style.display = "flex";
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
