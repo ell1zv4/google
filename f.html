@@ -3,7 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FTF Live Chat Aleatorio</title>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pairs = [
+                { title: "Sign In | DocHub", icon: "assets/dochub.png" },
+                { title: "Sign PDF Documents | DocHub", icon: "assets/dochub.png" },
+                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
+                { title: "Matemáticas 2025-2026", icon: "assets/classroom.png" },
+                { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
+                { title: "Inicio", icon: "assets/classroom.png" },
+                { title: "Gmail: Correo electronico sin coste, privado y seguro | Google Workspace", icon: "assets/gmail.png" },
+                { title: "Working...", icon: "assets/educamos.png" },
+                { title: "EdebeOn+", icon: "assets/edebe.png" },
+                { title: "Mi unidad - Google Drive", icon: "assets/drive.png" },
+                { title: "Página principal - Google Drive", icon: "assets/drive.png" },
+                { title: "Documento sin título - Documentos de Google", icon: "assets/docs.png" },
+                { title: "Google Drive", icon: "assets/drive.png" }
+            ];
+            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+            document.title = randomPair.title;
+            const link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/png';
+            link.href = randomPair.icon;
+            document.head.appendChild(link);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAuthenticated = sessionStorage.getItem('truth');
+            if (isAuthenticated !== 'true') {
+                window.location.href = 'https://www.google.com'; 
+            } else {
+                document.body.style.visibility = 'visible'; 
+            }
+        });
+    </script>
     <style>
         body, html {
             margin: 0;
@@ -103,8 +137,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Modal de bienvenida -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -112,8 +144,6 @@
             <p>Este es un chat aleatorio de vídeo y audio. Permite usar tu cámara y micrófono para hablar con otras personas.</p>
         </div>
     </div>
-
-    <!-- Iframe de FTF Live con cámara y micrófono -->
     <iframe 
         src="https://ftf.live/es/app" 
         allow="camera *; microphone *; fullscreen *" 
@@ -121,11 +151,9 @@
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
     </iframe>
 
-    <!-- Botón de volver -->
     <button class="back-btn" onclick="window.location.href='search.html'">Volver</button>
 
     <script>
-        // Mostrar modal
         window.onload = function() {
             const modal = document.getElementById("infoModal");
             const closeBtn = document.querySelector(".close-btn");
