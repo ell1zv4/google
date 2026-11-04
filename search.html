@@ -1,132 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const pairs = [
-                { title: "Gmail", icon: "assets/gmail.png" },
-                { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
-                { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
-                { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
-                { title: "Inicio", icon: "assets/classroom.png" },
-                { title: "Google Drive", icon: "assets/drive.png" }
-            ];
-            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
-            document.title = randomPair.title;
-            const link = document.createElement('link');
-            link.rel = 'icon';
-            link.type = 'image/png';
-            link.href = randomPair.icon;
-            document.head.appendChild(link);
-        });
-    </script>
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #1e1f21;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            visibility: hidden;
-        }
-
-        .carteles {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-        }
-
-        .divs {
-            background-color: #292b2e;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .divs:hover {
-            background-color: #3a3d41;
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 150, 255, 0.2);
-        }
-
-        .divs img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                filter: blur(16px);
-            }
-            100% {
-                opacity: 1;
-                filter: blur(0);
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('truth');
-            
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com';
-            } else {
-                document.body.style.visibility = 'visible';
-                
-                document.querySelectorAll('.divs').forEach(div => {
-                    div.addEventListener('click', async () => {
-                        const link = div.dataset.link;
-
-                        try {
-                            await goFullscreen();
-                        } catch (error) {
-                            console.error("No se pudo activar la pantalla completa:", error);
-                        }
-
-                        window.location.replace(link);
-                    });
-                    div.style.opacity = 1;
-                });
-            }
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0014">
+  <meta name="description" content="RISB: juegos arcade, puzles y sitios para descubrir.">
+  <title>RISB — Juega y descubre</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0014'/%3E%3Ctext x='15' y='47' font-size='44' font-family='monospace' font-weight='bold' fill='%2300ffff'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="portal.css">
+  <script>
+    try {
+      if (sessionStorage.getItem('truth') !== 'true') location.replace('index.html');
+      else document.documentElement.dataset.authenticated = 'true';
+    } catch { location.replace('index.html'); }
+  </script>
+  <style>html:not([data-authenticated]) body{visibility:hidden}</style>
+  <script type="module" src="portal.mjs"></script>
 </head>
-<body>
-    <div class="carteles">
-        <div class="minijuegos divs" data-link="lens.html">
-            <img src="assets/minijuegos.png" alt="Minijuegos">
+<body data-section="home">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <aside class="sidebar">
+    <a class="brand" href="search.html" aria-label="RISB, inicio">RISB<span>.</span></a>
+    <nav aria-label="Secciones">
+      <div class="nav-group">
+        <button class="nav-item" data-section-link="home">Descubrir</button>
+        <button class="nav-item" data-section-link="games">Todos los juegos</button>
+        <button class="nav-item" data-section-link="local">Juegos en RISB</button>
+        <button class="nav-item" data-section-link="favorites">Favoritos <span id="favorites-count" class="nav-count">0</span></button>
+        <button class="nav-item" data-section-link="recent">Recientes</button>
+      </div>
+      <p class="nav-label">Más para explorar</p>
+      <div class="nav-group">
+        <button class="nav-item" data-section-link="football">Fútbol</button>
+        <button class="nav-item" data-section-link="clothing">Ropa</button>
+        <button class="nav-item" data-section-link="music">Música y radio</button>
+        <button class="nav-item" data-section-link="video">Vídeo y TV</button>
+        <button class="nav-item" data-section-link="tools">Herramientas</button>
+        <button class="nav-item" data-section-link="learn">Aprender</button>
+      </div>
+    </nav>
+    <div class="sidebar-foot">Tu colección se guarda<br>en este navegador.<br><a href="https://github.com/ell1zv4/google" target="_blank" rel="noopener noreferrer">Proyecto en GitHub</a></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="search-box" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg>
+        <label for="search" class="sr-only">Buscar en esta sección</label>
+        <input id="search" type="search" placeholder="Busca tu próxima partida…" autocomplete="off">
+        <button id="clear-search" aria-label="Borrar búsqueda">Borrar</button>
+      </div>
+      <span class="topbar-tag">Un sitio. Más posibilidades.</span>
+    </header>
+    <main id="main">
+      <div class="page-heading"><h1 id="page-title">Descubre RISB</h1><p id="page-description">Juegos y sitios para tener a mano.</p></div>
+      <section id="hero" class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">24 juegos nuevos en RISB</span>
+          <h2 id="hero-title">Una más.<br><span>Y la última.</span></h2>
+          <p>Arcade, puzles y retos rápidos. Abre un juego, supera tu récord y vuelve cuando quieras.</p>
+          <div class="hero-buttons"><button class="primary" id="featured-play">Jugar a Snake</button><button data-section-link="local">Ver los 24 juegos</button></div>
         </div>
-        <div class="youtube divs" data-link="drive.html">
-            <img src="assets/youtube.png" alt="YouTube">
+        <div class="hero-art" aria-hidden="true">
+          <div class="arcade-screen"><svg viewBox="0 0 240 180" fill="none"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#20313e" stroke-width="1"/></pattern></defs><rect width="240" height="180" fill="url(#grid)"/><path d="M40 120H100V60H180V100" stroke="#00ffff" stroke-width="17" stroke-linejoin="round"/><rect x="172" y="92" width="17" height="17" rx="3" fill="#00ffff"/><circle cx="177" cy="103" r="2" fill="#0a0014"/><circle cx="185" cy="103" r="2" fill="#0a0014"/><rect x="191" y="131" width="17" height="17" fill="#ff006e"/><path d="M70 160H170" stroke="#ff006e" stroke-width="3"/></svg></div>
+          <span class="hero-label">Snake · listo para jugar</span>
         </div>
-        <div class="spotify divs" data-link="googlehelp.html">
-            <img src="assets/rojadirecta.png" alt="Ja">
+      </section>
+      <div class="stats" aria-label="Contenido del catálogo"><span class="stat"><strong id="game-total">140</strong> juegos</span><span class="stat"><strong id="local-total">24</strong> en RISB</span><span class="stat"><strong id="site-total">43</strong> sitios</span></div>
+      <p id="storage-note" class="notice" role="status" hidden>No se pueden guardar preferencias en este navegador. Puedes seguir jugando; los cambios durarán esta visita.</p>
+      <p id="external-note" class="notice" hidden></p>
+      <div class="catalog-toolbar">
+        <div class="catalog-title"><h2 id="results-title" tabindex="-1">Explora el catálogo</h2><p id="result-count" role="status" aria-live="polite"></p></div>
+        <div class="filters">
+          <label for="category">Categoría<select id="category"><option>Todas</option></select></label>
+          <label for="sort">Orden<select id="sort"><option value="recommended">Destacados primero</option><option value="az">Nombre A–Z</option></select></label>
+          <button id="random-game">Sorpréndeme</button>
+          <button id="clear-history" hidden>Vaciar recientes</button>
         </div>
-        <div class="game1 divs" data-link="docs.html">
-            <img src="assets/bing-removebg-preview.png" alt="Bing">
-        </div>
-        <div class="divs" data-link="f.html">
-            <img src="assets/camara.png" alt="Peliculas">
-        </div>
-    </div>
+      </div>
+      <div id="catalog" class="catalog"></div>
+      <div id="empty-state" class="empty-state" hidden><h3 id="empty-title">No hay coincidencias</h3><p id="empty-copy">Prueba con otra búsqueda.</p><button id="reset-filters">Explorar juegos</button></div>
+      <noscript><p>Activa JavaScript para abrir el catálogo y jugar.</p></noscript>
+    </main>
+    <footer class="footer">Los juegos «En RISB» se ejecutan aquí. Los juegos y sitios externos dependen de sus proveedores y de los permisos de tu red.</footer>
+  </div>
+  <dialog id="player" class="player" aria-labelledby="player-title">
+    <header class="player-header"><div><p id="player-category"></p><h2 id="player-title">Juego</h2></div><button id="close-player" autofocus>Cerrar juego</button></header>
+    <div class="player-actions"><button id="restart-game">Reiniciar</button><button id="fullscreen">Pantalla completa</button><a id="open-external" target="_blank" rel="noopener noreferrer" hidden>Abrir web</a><span id="best-score" class="best-score"></span></div>
+    <p id="player-status" class="player-status" role="status"></p>
+    <div id="game-root" class="game-root"></div>
+  </dialog>
 </body>
 </html>
