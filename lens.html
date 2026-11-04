@@ -1,692 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const pairs = [
-                { title: "Sign In | DocHub", icon: "assets/dochub.png" },
-                { title: "Sign PDF Documents | DocHub", icon: "assets/dochub.png" },
-                { title: "Inicia sesión: Cuentas de Google", icon: "assets/google-favicon.png" },
-                { title: "Matemáticas 2024-2025", icon: "assets/classroom.png" },
-                { title: "SM Educamos - Salesianos Barakaldo", icon: "assets/educamos.png" },
-                { title: "Inicio", icon: "assets/classroom.png" },
-                { title: "Gmail: Correo electronico sin coste, privado y seguro | Google Workspace", icon: "assets/gmail.png" },
-                { title: "Working...", icon: "assets/educamos.png" },
-                { title: "EdebeOn+", icon: "assets/edebe.png" },
-                { title: "Mi unidad - Google Drive", icon: "assets/drive.png" },
-                { title: "Página principal - Google Drive", icon: "assets/drive.png" },
-                { title: "Documento sin título - Documentos de Google", icon: "assets/docs.png" },
-                { title: "Google Drive", icon: "assets/drive.png" }
-            ];
-            const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
-            document.title = randomPair.title;
-            const link = document.createElement('link');
-            link.rel = 'icon';
-            link.type = 'image/png';
-            link.href = randomPair.icon;
-            document.head.appendChild(link);
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('truth');
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com'; 
-            } else {
-                document.body.style.visibility = 'visible'; 
-            }
-        });
-    </script>
-    <style>
-        :fullscreen {
-            width: 100%;
-            height: 100%;
-            background: black; 
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1e1e1e;
-            position: relative;
-        }
-        h1 {
-            text-align: center;
-            padding: 20px;
-            color: #f0f0f0;
-            font-size: 2.5rem;
-            margin: 0;
-        }
-        .back-button {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background-color: #616c73;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            z-index: 10;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #616c73;
-            transform: translateY(-2px);
-        }
-        .game-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-            gap: 20px;
-        }
-        .game-item {
-            background-color: #3a3a3a;
-            width: 200px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .game-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 255, 255, 0.4);
-        }
-        .game-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-        .game-item p {
-            text-align: center;
-            padding: 10px;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #f0f0f0;
-        }
-        .iframe-overlay {
-            position: fixed;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: top 0.5s ease;
-        }
-        .iframe-container {
-            position: relative;
-            width: 80%;
-            height: 500px;
-            background-color: transparent;
-            border-radius: 0;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
-            background-color: #ff5252;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            text-align: center;
-            cursor: pointer;
-            z-index: 100;
-            transition: background-color 0.3s ease;
-        }
-        .close-button:hover {
-            background-color: #e04747;
-        }
-        @media (max-width: 768px) {
-            .iframe-container {
-                width: 100%;
-                height: 400px;
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isAuthenticated = sessionStorage.getItem('truth');
-            if (isAuthenticated !== 'true') {
-                window.location.href = 'https://www.google.com';
-            } else {
-                document.body.style.visibility = 'visible';
-            }
-        });
-
-        function loadGame(url) {
-            const iframeOverlay = document.getElementById('iframe-overlay');
-            const iframeContainer = document.getElementById('iframe-container');
-            iframeContainer.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
-            iframeOverlay.style.top = '0';
-            toggleFullScreen(iframeContainer); 
-        }
-        
-        function toggleFullScreen(element) {
-            if (!document.fullscreenElement) {
-                element.requestFullscreen().catch(err => {
-                    alert(`Error al intentar activar pantalla completa: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
-        function closeIframe() {
-            const iframeOverlay = document.getElementById('iframe-overlay');
-            iframeOverlay.style.top = '-100%';
-            document.exitFullscreen();  
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0014">
+  <meta name="description" content="RISB: juegos arcade, puzles y sitios para descubrir.">
+  <title>RISB — Juega y descubre</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0014'/%3E%3Ctext x='15' y='47' font-size='44' font-family='monospace' font-weight='bold' fill='%2300ffff'%3ER%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="portal.css">
+  <script>
+    try {
+      if (sessionStorage.getItem('truth') !== 'true') location.replace('index.html');
+      else document.documentElement.dataset.authenticated = 'true';
+    } catch { location.replace('index.html'); }
+  </script>
+  <style>html:not([data-authenticated]) body{visibility:hidden}</style>
+  <script type="module" src="portal.mjs"></script>
 </head>
-<body>
-     <div class="game-container">
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/steal-car-duel')">
-            <img src="assets/steal.jpg" alt="Drift Hunters">
-            <p>Steal a car</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/racemasters-clash-of-cars')">
-            <img src="assets/race.png" alt="Drift Hunters">
-            <p>Racemasters</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/zombie-horde-build-survive')">
-            <img src="assets/zombie.avif" alt="Drift Hunters">
-            <p>Zombie Horde</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://dirfxx.com/games/iframe.php?game=EuropeanRoulette&lang=es')">
-            <img src="assets/ruleta.png" alt="Drift Hunters">
-            <p>Ruleta Europea</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://play.gamezaft.com/c/en-US-drivetown-index-html/index.html')">
-            <img src="assets/drive.avif" alt="Drift Hunters">
-            <p>DriveTown</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://drift-hunters.co/drift-hunters-games.embed')">
-            <img src="assets/s225x225-1726562118.png" alt="Drift Hunters">
-            <p>Drift Hunters</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/idle-mining-empire')">
-            <img src="assets/idle.png" alt="Polytrack">
-            <p>Idle Mining</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/sports-heads-football-championship')">
-            <img src="assets/sport.jpg" alt="Polytrack">
-            <p>Sport Heads</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://polytrackonline.com')">
-            <img src="assets/polytrack.avif" alt="Polytrack">
-            <p>Polytrack</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/haxball')">
-            <img src="assets/hax.jpg" alt="Polytrack">
-            <p>Haxball</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/golf-hit')">
-            <img src="assets/golp.jpg" alt="World Guesser">
-            <p>Golf hit</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/farm-merge-valley')">
-            <img src="assets/farm.jpg" alt="World Guesser">
-            <p>Farm Megre Valley</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/wave-road-3d')">
-            <img src="assets/wave.png" alt="World Guesser">
-            <p>Wave Road</p>
-        </div>
-         <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/crazy-bus-station')">
-            <img src="assets/crazy.jpg" alt="World Guesser">
-            <p>Crazy bus station</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/bounce-up')">
-            <img src="assets/bounce.png" alt="World Guesser">
-            <p>Bounce Up</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/ludo-hero')">
-            <img src="assets/ludo.jpg" alt="World Guesser">
-            <p>Ludo hero</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/8-ball-pool')">
-            <img src="assets/8-ball-pool.png" alt="World Guesser">
-            <p>8 Ball Pool</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/merge-haven')">
-            <img src="assets/merge-haven.png" alt="World Guesser">
-            <p>Merge Haven</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/world-guessr')">
-            <img src="assets/world.png" alt="World Guesser">
-            <p>World Guesser</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://cloud.onlinegames.io/games/2025/unity/checkout-frenzy/index-og.html')">
-            <img src="assets/checkout-frenzy-cashier-game-xs.jpg" alt="Checkout Frenzy">
-            <p>Checkout Frenzy</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.onlinegames.io/games/2021/unity3/legendary-sniper/index.html')">
-            <img src="assets/Legendary-Sniper.jpg" alt="Legendary Sniper">
-            <p>Legendary Sniper</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://cloud.onlinegames.io/games/2024/unity2/survival-island/index-og.html')">
-            <img src="assets/A1Ga6SxZHXL.png" alt="Survival Island">
-            <p>Survival Island</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.onlinegames.io/games/2022/unity/taxi-simulator/index.html')">
-            <img src="assets/capsule_616x353_alt_assets_1.jpg" alt="Taxi Simulator">
-            <p>Taxi Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.onlinegames.io/games/2023/unity3/idle-dev-startup/index.html')">
-            <img src="assets/images (1).jpg" alt="Idle Dev Startup">
-            <p>Idle Dev Startup</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.jopi.com/gam/summer-maze/')">
-            <img src="assets/images (2).jpg" alt="Summer Maze">
-            <p>Summer Maze</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/nuclear-day-survival')">
-            <img src="assets/unnamed.jpg" alt="Nuclear Day Survival">
-            <p>Nuclear Day Survival</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/longcat')">
-            <img src="assets/7a35aae9fe1cdb7d113d61d3cd472845.avif" alt="Longcat">
-            <p>Longcat</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/mx-offroad-master')">
-            <img src="assets/mx.avif" alt="MX Ofroad Master">
-            <p>MX Ofroad Master</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/truck-simulator-russia')">
-            <img src="assets/road.avif" alt="Track simulator">
-            <p>Truck simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/supermarket-simulator-cashier-game')">
-            <img src="assets/market.jpg" alt="3D Supermarket Simulator">
-            <p>3D Supermarket Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/juego/country-life-meadows')">
-            <img src="assets/country.avif" alt="Country life Meadows">
-            <p>Country life Meadows</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/street-fighter-simulator')">
-            <img src="assets/fight.jpg" alt="Street Fighter Simulator">
-            <p>Street Fighter Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/sniper-shot-bullet-time')">
-            <img src="assets/sniper.png" alt="">
-            <p>Sniper Shot</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/soccer-europe-quiz')">
-            <img src="assets/fquiz.png" alt="">
-            <p>Football Quiz</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/3d-flight-simulator')">
-            <img src="assets/fly.jpg" alt="">
-            <p>3D Flight Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/drift-hunters')">
-            <img src="assets/drift.avif" alt="">
-            <p>Drift Hunters</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/space-company')">
-            <img src="assets/space.avif" alt="">
-            <p>Space Company</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/chess-clicker-lhi')">
-            <img src="assets/click.avif" alt="">
-            <p>Chess Clicker</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/jump-guys')">
-            <img src="assets/jump.jpg" alt="">
-            <p>Jump Guys</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/smash-karts')">
-            <img src="assets/smash.avif" alt="">
-            <p>Smash Karts</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/level-devil')">
-            <img src="assets/level.jpg" alt="Level Devil">
-            <p>Level Devil</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/world-z-defense---zombie-defense')">
-            <img src="assets/world.avif" alt="World-Z Defense">
-            <p>World-Z Defense</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/chrome-dino')">
-            <img src="assets/dino.png" alt="Dinosaur game">
-            <p>Dinosaur game</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/haunted-school---horror-game')">
-            <img src="assets/school.avif" alt="Haunted School">
-            <p>Haunted School</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/holey-io-battle-royale')">
-            <img src="assets/battle.avif" alt="Hole.io Battle Royale">
-            <p>Hole.io Battle Royale</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/jet-rush')">
-            <img src="assets/jet.avif" alt="Jet Rush">
-            <p>Jet Rush</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/street-life')">
-            <img src="assets/street.avif" alt="Street Life">
-            <p>Street Life</p>
-        </div>
-        <div class="game-item" id="slots" onclick="loadGame('https://wefut.com/draft-simulator/25'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/fut.avif" alt="Fut Draft">
-            <p>Fut Draft</p>
-        </div>
-        <div class="game-item" id="slots" onclick="loadGame('https://www.fifarosters.com/pack'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/opener.jpg" alt="FC 25 Pack Opener">
-            <p>FC 25 Pack Opener</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/dino-survival-3d-simulator')">
-            <img src="assets/dino.avif" alt="Dino 3D Survival">
-            <p>Dino 3D Survival</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/money-factory-aqs')">
-            <img src="assets/money.avif" alt="Money Factory">
-            <p>Money Factory</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/perfect-drive')">
-            <img src="assets/perfect.avif" alt="Perfect Drive">
-            <p>Perfect Drive</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/blogger-clicker')">
-            <img src="assets/blogger.avif" alt="Blogger Clicker">
-            <p>Blogger Clicker</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.1001juegos.com/embed/empire-city')">
-            <img src="assets/empire.jpg" alt="Empire City">
-            <p>Empire City</p>
-        </div>
-        <div class="game-item" id="slots" onclick="loadGame('https://www.247slots.org'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/slots.png" alt="Slots">
-            <p>Slots</p>
-        </div>
-        <div class="game-item" id="chess" onclick="loadGame('https://www.247chess.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/chess.png" alt="Chess">
-            <p>Chess</p>
-        </div>
-        <div class="game-item" id="pool" onclick="loadGame('https://www.247pool.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/billar.png" alt="Pool">
-            <p>Pool</p>
-        </div>
-        <div class="game-item" id="black" onclick="loadGame('https://www.247blackjack.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/black.png" alt="black">
-            <p>BlackJack</p>
-        </div>
-        <div class="game-item" id="ruleta" onclick="loadGame('https://www.247roulette.org'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/ruleta.jpg" alt="ruleta">
-            <p>Ruleta</p>
-        </div>
-        <div class="game-item" id="pinball" onclick="loadGame('https://www.247pinball.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/pinball.png" alt="pinball">
-            <p>Pinball</p>
-        </div>
-        <div class="game-item" id="buscaminas" onclick="loadGame('https://www.247minesweeper.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/buscaminas.png" alt="pinball">
-            <p>Buscaminas</p>
-        </div>
-        <div class="game-item" id="wordle" onclick="loadGame('https://lapalabradeldia.com'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/wordle.png" alt="wordle">
-            <p>Wordle</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://hole-io.com/')">
-                <img src="assets/hole.jpg" alt="Hole.io">
-                <p>Hole.io</p>
-        </div>
-        <div class="game-item" id="minecraft" onclick="loadGame('https://eaglercraft.com/mc/1.8.8/'); toggleFullScreen(this.getAttribute('data-iframe-id'));">
-            <img src="assets/minecraft.jpg" alt="Minecraft">
-            <p>Minecraft</p>
-        </div>
-        <div class="game-item" id="road" onclick="loadGame('https://slowroads.io'); toggleFullScreen(this.getAttribute('data-iframe-id'))">
-            <img src="assets/road.jpg" alt="Road">
-            <p>Road Infinite</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-world-online')">
-            <img src="assets/super-mario-world.jpg" alt="Super Mario World Online">
-            <p>Super Mario World Online</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/cashier-3d')">
-            <img src="assets/cashier3d.jpg" alt="Cashier 3D">
-            <p>Cashier 3D</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/uno')">
-            <img src="assets/uno.svg" alt="UNO">
-            <p>UNO</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/1v1-lol')">
-            <img src="assets/1v1lol.avif" alt="1v1 LOL">
-            <p>1v1 LOL</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/plants-vs-zombies')">
-            <img src="assets/plantas-contra-zombies.jpg" alt="Plants vs Zombies">
-            <p>Plants vs Zombies</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/geometry-dash')">
-            <img src="assets/geometry-dash.png" alt="Geometry Dash">
-            <p>Geometry Dash</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/bloxd-io')">
-            <img src="assets/bloxd-io.avif" alt="Bloxd.io">
-            <p>Bloxd.io</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/five-nights-at-freddys')">
-            <img src="assets/five-nights-at-freddy.png" alt="Five Nights at Freddy's">
-            <p>Five Nights at Freddy's</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/run-3')">
-            <img src="assets/run3.avif" alt="Run 3">
-            <p>Run 3</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/idle-airport-tycoon/index.html')">
-            <img src="assets/airport.jpg" alt="Idle Supermarket">
-            <p>Idle Airport Tycoon</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/happy-wheels')">
-            <img src="assets/happy-wheels.avif" alt="Happy Wheels">
-            <p>Happy Wheels</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/the-torture-game-2x')">
-            <img src="assets/torture-game.jpg" alt="Torture Game">
-            <p>Torture Game</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/hot-dog-bush')">
-            <img src="assets/hot-dug-bush.jpg" alt="Hot Dug Bush">
-            <p>Hot Dug Bush</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/basketball-smash')">
-            <img src="assets/basketball-smash.jpg" alt="Basketball Smash">
-            <p>Basketball Smash</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/plague-inc-pandemic-simulator')">
-            <img src="assets/plague-pandemic-simulator.jpg" alt="Plague Pandemic Simulator">
-            <p>Plague Pandemic Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/pinturillo-2')">
-            <img src="assets/pinturillo2.png" alt="Pinturillo 2">
-            <p>Pinturillo 2</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/paper-io')">
-            <img src="assets/paper.jpg" alt="Paper.io">
-            <p>Paper.io</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/tetris-i1240')">
-            <img src="assets/tetris.png" alt="Five Nights at Freddy's">
-            <p>Tetris</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/call-of-war')">
-            <img src="assets/call-of-war.jpg" alt="Call of War">
-            <p>Call of War</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-kart')">
-            <img src="assets/super-mario-kart.jpg" alt="Super Mario Kart">
-            <p>Super Mario Kart</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/madness-sherrifs-compound')">
-            <img src="assets/madness.jpg" alt="Madness Sherrifs">
-            <p>Madness Sherrifs</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/fifa-road-to-world-cup-98')">
-            <img src="assets/fifa.jpg" alt="Fifa 98">
-            <p>Fifa 98</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/pou-online')">
-            <img src="assets/pou.jpg" alt="Pou">
-            <p>Pou</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/frag-pro-shooter')">
-            <img src="assets/frag.avif" alt="Frag Pro Shooter">
-            <p>Frag PRO Shooter</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/penalty-shooters-2')">
-            <img src="assets/penalty.avif" alt="Penalty Shooter">
-            <p>Penalty Shooter</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/google-snake')">
-            <img src="assets/snake.png" alt="Google Snake">
-            <p>Snake Game</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/pixel-art-color-by-number')">
-            <img src="assets/pixelart.jpg" alt="Pixel art">
-            <p>Pixel art</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/retro-racing-double-dash')">
-            <img src="assets/retroracing.jpg" alt="Retro Racing">
-            <p>Retro Racing</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/table-tennis-world-tour')">
-            <img src="assets/pinpong.avif" alt="Ping-Pong">
-            <p>Ping-Pong</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/bus-stop-jam')">
-            <img src="assets/busstop.jpg" alt="Bus Stop">
-            <p>Bus Stop</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/wooden-bolts-and-nuts')">
-            <img src="assets/wooden.jpg" alt="Wooden Bolts and Nuts">
-            <p>Wooden Bolts and Nuts</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/racing-limits')">
-            <img src="assets/racing.png" alt="Racing Limits">
-            <p>Racing Limits</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_ES/hazmob-fps-online-shooter/index.html')">
-            <img src="assets/counter.png" alt="Racing Limits">
-            <p>Counter Strike</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/quiz-epic-logos')">
-            <img src="assets/logo.jpeg" alt="Racing Limits">
-            <p>Logo Quiz</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/moto-x3m')">
-            <img src="assets/moto.avif" alt="Racing Limits">
-            <p>Moto X3M</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-bros')">
-            <img src="assets/mario.png" alt="Racing Limits">
-            <p>Super Mario Bros</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/super-mario-64')">
-            <img src="assets/mario64.jpg" alt="Super Mario 64">
-            <p>Super Mario 64</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/bitlife-life-simulator')">
-            <img src="assets/bitlife.png" alt="BitLife Simulator">
-            <p>BitLife Simulator</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/stickman-kingdom-clash')">
-            <img src="assets/stickman.jpg" alt="Stickman Kingdom">
-            <p>Stickman Kingdom</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://www.minijuegos.com/embed/save-the-dog')">
-            <img src="assets/dog.png" alt="Save the dog">
-            <p>Save the dog</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_ES/mad-town-andreas-mafia-storie/index.html')">
-            <img src="assets/gta.jpg" alt="GTA">
-            <p>GTA</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/super-star-car/index.html')">
-            <img src="assets/car.avif" alt="Golf it">
-            <p>Super Star Car</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/daily-room-escape/index.html?')">
-            <img src="assets/escape.jpg" alt="Golf it">
-            <p>Room Escape</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/sky-riders-buk/index.html')">
-            <img src="assets/descent.avif" alt="Crazy Descent">
-            <p>Sky Riders</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/idle-supermarket-tycoon/index.html')">
-            <img src="assets/supermarket.jpg" alt="Idle Supermarket Tycoon">
-            <p>Idle Supermarket Tycoon</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/idle-football-manager/index.html')">
-            <img src="assets/idle.jpg" alt="Idle Football Manager">
-            <p>Idle Football Manager</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/free-kick-classic/index.html')">
-            <img src="assets/kick.jpg" alt="Free Kick Classic">
-            <p>Free Kick Classic</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/mini-golf-club/index.html')">
-            <img src="assets/golf.avif" alt="Mini Golf Club">
-            <p>Mini Golf Club</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/kiomet-com/index.html')">
-            <img src="assets/kiomet.avif" alt="Kiomet">
-            <p>Kiomet</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/ships-3d/index.html')">
-            <img src="assets/ship.avif" alt="Ships 3D">
-            <p>Ships 3D</p>
-        </div>
-        <div class="game-item" onclick="loadGame('https://games.crazygames.com/en_US/time-shooter-2/index.html')">
-            <img src="assets/time.avif" alt="Time Shooter 2">
-            <p>Time Shooter 2</p>
-        </div>        
-    </div>
-    <div id="iframe-overlay" class="iframe-overlay">
-        <div class="iframe-container" id="iframe-container"></div>
-        <button class="close-button" onclick="closeIframe()">X</button>
-    </div>
-    <button id="search-button" class="search-button" onclick="loadGame('https://www.minijuegos.com')">🔍</button>
-    <style>
-        .search-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 10px;
-            background-color: #616c73;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            z-index: 10;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
-        }
-    </style>
-    <a href="search.html" class="back-button">Volver</a>
+<body data-section="games">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <aside class="sidebar">
+    <a class="brand" href="search.html" aria-label="RISB, inicio">RISB<span>.</span></a>
+    <nav aria-label="Secciones">
+      <div class="nav-group">
+        <button class="nav-item" data-section-link="home">Descubrir</button>
+        <button class="nav-item" data-section-link="games">Todos los juegos</button>
+        <button class="nav-item" data-section-link="local">Juegos en RISB</button>
+        <button class="nav-item" data-section-link="favorites">Favoritos <span id="favorites-count" class="nav-count">0</span></button>
+        <button class="nav-item" data-section-link="recent">Recientes</button>
+      </div>
+      <p class="nav-label">Más para explorar</p>
+      <div class="nav-group">
+        <button class="nav-item" data-section-link="football">Fútbol</button>
+        <button class="nav-item" data-section-link="clothing">Ropa</button>
+        <button class="nav-item" data-section-link="music">Música y radio</button>
+        <button class="nav-item" data-section-link="video">Vídeo y TV</button>
+        <button class="nav-item" data-section-link="tools">Herramientas</button>
+        <button class="nav-item" data-section-link="learn">Aprender</button>
+      </div>
+    </nav>
+    <div class="sidebar-foot">Tu colección se guarda<br>en este navegador.<br><a href="https://github.com/ell1zv4/google" target="_blank" rel="noopener noreferrer">Proyecto en GitHub</a></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="search-box" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg>
+        <label for="search" class="sr-only">Buscar en esta sección</label>
+        <input id="search" type="search" placeholder="Busca tu próxima partida…" autocomplete="off">
+        <button id="clear-search" aria-label="Borrar búsqueda">Borrar</button>
+      </div>
+      <span class="topbar-tag">Un sitio. Más posibilidades.</span>
+    </header>
+    <main id="main">
+      <div class="page-heading"><h1 id="page-title">Descubre RISB</h1><p id="page-description">Juegos y sitios para tener a mano.</p></div>
+      <section id="hero" class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">24 juegos nuevos en RISB</span>
+          <h2 id="hero-title">Una más.<br><span>Y la última.</span></h2>
+          <p>Arcade, puzles y retos rápidos. Abre un juego, supera tu récord y vuelve cuando quieras.</p>
+          <div class="hero-buttons"><button class="primary" id="featured-play">Jugar a Snake</button><button data-section-link="local">Ver los 24 juegos</button></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="arcade-screen"><svg viewBox="0 0 240 180" fill="none"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#20313e" stroke-width="1"/></pattern></defs><rect width="240" height="180" fill="url(#grid)"/><path d="M40 120H100V60H180V100" stroke="#00ffff" stroke-width="17" stroke-linejoin="round"/><rect x="172" y="92" width="17" height="17" rx="3" fill="#00ffff"/><circle cx="177" cy="103" r="2" fill="#0a0014"/><circle cx="185" cy="103" r="2" fill="#0a0014"/><rect x="191" y="131" width="17" height="17" fill="#ff006e"/><path d="M70 160H170" stroke="#ff006e" stroke-width="3"/></svg></div>
+          <span class="hero-label">Snake · listo para jugar</span>
+        </div>
+      </section>
+      <div class="stats" aria-label="Contenido del catálogo"><span class="stat"><strong id="game-total">140</strong> juegos</span><span class="stat"><strong id="local-total">24</strong> en RISB</span><span class="stat"><strong id="site-total">43</strong> sitios</span></div>
+      <p id="storage-note" class="notice" role="status" hidden>No se pueden guardar preferencias en este navegador. Puedes seguir jugando; los cambios durarán esta visita.</p>
+      <p id="external-note" class="notice" hidden></p>
+      <div class="catalog-toolbar">
+        <div class="catalog-title"><h2 id="results-title" tabindex="-1">Explora el catálogo</h2><p id="result-count" role="status" aria-live="polite"></p></div>
+        <div class="filters">
+          <label for="category">Categoría<select id="category"><option>Todas</option></select></label>
+          <label for="sort">Orden<select id="sort"><option value="recommended">Destacados primero</option><option value="az">Nombre A–Z</option></select></label>
+          <button id="random-game">Sorpréndeme</button>
+          <button id="clear-history" hidden>Vaciar recientes</button>
+        </div>
+      </div>
+      <div id="catalog" class="catalog"></div>
+      <div id="empty-state" class="empty-state" hidden><h3 id="empty-title">No hay coincidencias</h3><p id="empty-copy">Prueba con otra búsqueda.</p><button id="reset-filters">Explorar juegos</button></div>
+      <noscript><p>Activa JavaScript para abrir el catálogo y jugar.</p></noscript>
+    </main>
+    <footer class="footer">Los juegos «En RISB» se ejecutan aquí. Los juegos y sitios externos dependen de sus proveedores y de los permisos de tu red.</footer>
+  </div>
+  <dialog id="player" class="player" aria-labelledby="player-title">
+    <header class="player-header"><div><p id="player-category"></p><h2 id="player-title">Juego</h2></div><button id="close-player" autofocus>Cerrar juego</button></header>
+    <div class="player-actions"><button id="restart-game">Reiniciar</button><button id="fullscreen">Pantalla completa</button><a id="open-external" target="_blank" rel="noopener noreferrer" hidden>Abrir web</a><span id="best-score" class="best-score"></span></div>
+    <p id="player-status" class="player-status" role="status"></p>
+    <div id="game-root" class="game-root"></div>
+  </dialog>
 </body>
 </html>

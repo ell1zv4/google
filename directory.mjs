@@ -1,0 +1,61 @@
+const groups = {
+  football: [
+    ['RTVE Play', 'https://www.rtve.es/play/', 'Directos y programas deportivos de RTVE.', 'Directos'],
+    ['UEFA.tv', 'https://www.uefa.tv/', 'Vídeos y contenido oficial de las competiciones UEFA.', 'Vídeos'],
+    ['FIFA+', 'https://www.plus.fifa.com/', 'El servicio de vídeo oficial de FIFA.', 'Vídeos'],
+    ['DAZN', 'https://www.dazn.com/es-ES/welcome', 'Consulta las competiciones y planes disponibles en España.', 'Suscripción'],
+    ['Movistar Plus+', 'https://www.movistarplus.es/', 'Programación deportiva y opciones de suscripción.', 'Suscripción'],
+    ['LaLiga', 'https://www.laliga.com/', 'Calendarios, clasificaciones y resultados oficiales.', 'Resultados'],
+    ['Athletic Club', 'https://www.athletic-club.eus/', 'Noticias, calendario y contenidos del Athletic.', 'Clubes'],
+    ['Real Sociedad', 'https://www.realsociedad.eus/', 'Noticias y calendario de la Real.', 'Clubes'],
+  ],
+  clothing: [
+    ['Zara', 'https://www.zara.com/es/', 'Colecciones y tienda online de Zara.', 'Moda'],
+    ['Mango', 'https://shop.mango.com/es', 'Ropa y accesorios de Mango.', 'Moda'],
+    ['UNIQLO', 'https://www.uniqlo.com/es/es/', 'Básicos y colecciones LifeWear.', 'Moda'],
+    ['H&M', 'https://www2.hm.com/es_es/index.html', 'Ropa y accesorios de H&M.', 'Moda'],
+    ['Pull&Bear', 'https://www.pullandbear.com/es/', 'Colecciones de Pull&Bear.', 'Moda'],
+    ['Bershka', 'https://www.bershka.com/es/', 'Ropa, calzado y accesorios.', 'Moda'],
+    ['Nike', 'https://www.nike.com/es/', 'Zapatillas y ropa deportiva de Nike.', 'Deporte'],
+    ['adidas', 'https://www.adidas.es/', 'Zapatillas, ropa y accesorios adidas.', 'Deporte'],
+    ['Decathlon', 'https://www.decathlon.es/', 'Ropa y material para practicar deporte.', 'Deporte'],
+    ['Vinted', 'https://www.vinted.es/', 'Compra y venta de ropa de segunda mano.', 'Segunda mano'],
+  ],
+  music: [
+    ['Spotify', 'https://open.spotify.com/', 'Música, álbumes y listas en el reproductor web.', 'Música'],
+    ['YouTube Music', 'https://music.youtube.com/', 'Canciones y vídeos musicales.', 'Música'],
+    ['SoundCloud', 'https://soundcloud.com/', 'Artistas, sesiones y música independiente.', 'Música'],
+    ['Bandcamp', 'https://bandcamp.com/', 'Descubre música directamente de artistas y sellos.', 'Música'],
+    ['Radio Garden', 'https://radio.garden/', 'Explora emisoras de radio sobre un mapa.', 'Radio'],
+    ['Radio Euskadi', 'https://www.eitb.eus/es/radio/radio-euskadi/', 'La radio de EITB: programas y emisiones.', 'Radio'],
+  ],
+  video: [
+    ['YouTube', 'https://www.youtube.com/', 'Vídeos y canales de creadores.', 'Vídeo'],
+    ['Twitch', 'https://www.twitch.tv/', 'Emisiones en directo y comunidades.', 'Directos'],
+    ['Vimeo', 'https://vimeo.com/', 'Vídeo y cortometrajes de creadores.', 'Vídeo'],
+    ['EITB', 'https://www.eitb.eus/es/television/', 'Programas y televisión de EITB.', 'Televisión'],
+    ['ARTE', 'https://www.arte.tv/es/', 'Documentales y programas culturales.', 'Documentales'],
+  ],
+  tools: [
+    ['Photopea', 'https://www.photopea.com/', 'Edita imágenes y archivos de diseño en el navegador.', 'Creatividad'],
+    ['Excalidraw', 'https://excalidraw.com/', 'Una pizarra para dibujar esquemas.', 'Creatividad'],
+    ['Canva', 'https://www.canva.com/es_es/', 'Diseños, presentaciones y composiciones.', 'Creatividad'],
+    ['Desmos', 'https://www.desmos.com/calculator?lang=es', 'Calculadora gráfica interactiva.', 'Matemáticas'],
+    ['GeoGebra', 'https://www.geogebra.org/', 'Geometría y matemáticas interactivas.', 'Matemáticas'],
+    ['Google Maps', 'https://maps.google.com/', 'Mapas, lugares y rutas.', 'Mapas'],
+    ['OpenStreetMap', 'https://www.openstreetmap.org/', 'El mapa colaborativo del mundo.', 'Mapas'],
+    ['DeepL', 'https://www.deepl.com/translator', 'Traducción de textos.', 'Idiomas'],
+  ],
+  learn: [
+    ['Wikipedia', 'https://es.wikipedia.org/', 'Enciclopedia libre en español.', 'Consulta'],
+    ['Khan Academy', 'https://es.khanacademy.org/', 'Lecciones y ejercicios para aprender a tu ritmo.', 'Cursos'],
+    ['Duolingo', 'https://www.duolingo.com/', 'Practica idiomas con lecciones.', 'Idiomas'],
+    ['Euskaltzaindia', 'https://www.euskaltzaindia.eus/', 'Diccionarios y recursos de euskera.', 'Idiomas'],
+    ['MDN', 'https://developer.mozilla.org/es/', 'Documentación y guías de desarrollo web.', 'Programación'],
+    ['Scratch', 'https://scratch.mit.edu/', 'Crea historias, animaciones y juegos por bloques.', 'Programación'],
+  ],
+};
+
+export const directory = Object.entries(groups).flatMap(([section, entries]) => entries.map(([title, url, description, category], index) => ({
+  id: `link-${section}-${index}`, kind: 'link', section, title, url, description, category,
+})));
